@@ -1,0 +1,30 @@
+        self.line
+        self.span_file_date_time
+        self.instrument
+
+        self.row_exchg
+        self.underlying
+        self.commodity_product
+        self.product_type
+
+        self.option_type
+        self.option_contract_month_str
+        self.option_strike_price_str
+        self.option_contract_month_date
+
+        self.option_contract_month
+        self.option_contract_month_char
+        self.option_contract_year
+        self.option_span_cqg_code
+
+        self.option_strike_price
+        self.option_cqg_symbol
+
+
+        self.future_contract_month_str
+        self.future_contract_month_date
+        self.future_contract_month
+        self.future_contract_month_char
+        self.future_contract_year
+
+        self.settlement_price

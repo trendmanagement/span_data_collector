@@ -1,0 +1,33 @@
+{
+  "instruments":
+  [
+    {
+      "idinstrument": 96,
+      "optionstrikeincrement": 0.01,
+      "optionstrikedisplay": 1,
+      "spanstrikedisplay": 1
+    },
+    {
+        "idinstrument": 2,
+        "optionstrikeincrement": 0.25,
+        "optionstrikedisplay": 25,
+        "spanstrikedisplay": 2.5
+    },
+	{
+      "idinstrument": 11,
+	  "span_cqg_codes":[
+		{"cqg":"EP","span":"ES","optcod":" "},
+		{"cqg":"EW","span":"EW","optcod":"EW"},
+		{"cqg":"EW1","span":"EW1","optcod":"EW1"},
+		{"cqg":"EW2","span":"EW2","optcod":"EW2"},
+		{"cqg":"EW3","span":"EW3","optcod":"EW3"},
+		{"cqg":"EW4","span":"EW4","optcod":"EW4"},
+		{"cqg":"EP31","span":"E1C","optcod":"E1C"},
+		{"cqg":"EP32","span":"E2C","optcod":"E2C"},
+		{"cqg":"EP33","span":"E3C","optcod":"E3C"},
+		{"cqg":"EP34","span":"E4C","optcod":"E4C"},
+		{"cqg":"EP35","span":"E5C","optcod":"E5C"}
+		]
+    }
+  ]
+}
