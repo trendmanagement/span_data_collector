@@ -11,10 +11,13 @@ from span_reader.datasource_mongo import DataSourceMongo
 from datetime import datetime
 from span_reader.span_input_constants import *
 from pathlib import Path'''
+
 from span_reader.instrument_info import InstrumentInfo
 from collections import namedtuple
 from span_reader.span_objects import *
 from span_reader.option_calcs import calculateOptionVolatilityNR
+from span_reader.mongo_queries import MongoQueries
+
 
 class CmeSpanImport(object):
     """
@@ -32,6 +35,8 @@ class CmeSpanImport(object):
             self.optionenabled = 2
 
         self.short_file_name = ntpath.basename(self.filepath)
+
+        self.mongo_queries = MongoQueries()
 
         print(self.short_file_name)
 
@@ -158,122 +163,92 @@ class CmeSpanImport(object):
                     '''
 
                 '''below imports the future contract info'''
-                for row_dstBe in rowListTypeB:
+                for row_dstBe_option_info in rowListTypeB:
 
-                    row_dstBe.extract_commodity_product_code_identifiers()
+                    row_dstBe_option_info.extract_commodity_product_code_identifiers()
 
-                    if row_dstBe.product_type == SPAN_FILE_PRODUCT_TYPE_CODES.fut:
+                    if row_dstBe_option_info.product_type == SPAN_FILE_PRODUCT_TYPE_CODES.fut:
 
-                        row_dstBe.extract_future_identifiers()
+                        row_dstBe_option_info.extract_future_identifiers()
 
-                        row_dstBe.extract_future_expiration()
+                        row_dstBe_option_info.extract_future_expiration()
 
-                        rowListTypeB_Future_dict[row_dstBe.future_contract_month,row_dstBe.future_contract_year] = row_dstBe
+                        rowListTypeB_Future_dict[row_dstBe_option_info.future_contract_month,row_dstBe_option_info.future_contract_year] = row_dstBe_option_info
 
-                        if len(row_dstBe.future_expiration_str) > 0:
+                        if len(row_dstBe_option_info.future_expiration_str) > 0:
 
+                            self.mongo_queries.fill_future_info(row_dstBe_option_info)
 
-
-                            #instrument['cqgsymbol']
-                            #instrument['idinstrument']
-                            #instrument['spanfuturecode']
-
-                            #print('row_dstBe',row_dstBe.future_contract_month,row_dstBe.future_cqg_symbol)
-
-                            #update future info to db
-                            '''     dataQuery.Append("cqgdb.sp_updateContractTblFromSpanUpsert '");
-                                    // dataQuery += "contractname,month,monthint,year,idinstrument,expirationdate";
-                                    dataQuery.Append(spanUnderlyingFutureProps.futureContractCqgSymbol);
-                                    dataQuery.Append("', '");
-                                    dataQuery.Append(spanUnderlyingFutureProps.futureContractMonthChar);
-                                    dataQuery.Append("', ");
-                                    dataQuery.Append(spanUnderlyingFutureProps.futureContractMonth);
-                                    dataQuery.Append(", ");
-                                    dataQuery.Append(spanUnderlyingFutureProps.futureContractYear);
-                                    dataQuery.Append(", ");
-                                    dataQuery.Append(spanUnderlyingFutureProps.tblInstruments_InstrumentId);
-                                    dataQuery.Append(", '");
-                                    dataQuery.Append(
-                                        spanUnderlyingFutureProps.futureContractExpiration.ToString(
-                                            "yyyy-MM-dd", DateTimeFormatInfo.InvariantInfo));
-                                    dataQuery.Append("', '");
-                                    dataQuery.Append(spanUnderlyingFutureProps.futureContractCqgSymbol);
-                                    dataQuery.Append("'");
+                            print('&&&&&&&&&&',
+                                  row_dstBe_option_info.idcontract,
+                                  row_dstBe_option_info.contract_objectid)
 
 
-                                    '''
-
-                            #get the future id
                 '''gets future contract settlements'''
-                for row_dst_8_F_e in rowListType8_F:
-                    #print('****** row_dst_8_F_e ' + row_dst_8_F_e.product_type)
-                    #if row_dst_8_F_e.product_type == SPAN_FILE_PRODUCT_TYPE_CODES.fut:
+                for row_dst_8_F_e_future_data in rowListType8_F:
+                    #print('****** row_dst_8_F_e_future_data ' + row_dst_8_F_e_future_data.product_type)
+                    #if row_dst_8_F_e_future_data.product_type == SPAN_FILE_PRODUCT_TYPE_CODES.fut:
 
-                    row_dst_8_F_e.extract_future_identifiers()
+                    row_dst_8_F_e_future_data.extract_future_identifiers()
 
                     print('ticksize, display', instrument['spanticksize'], instrument['spantickdisplay'])
 
                     if data_row_type == SPAN_FILE_ROW_TYPES.TYPE_81:
 
-                        row_dst_8_F_e.extract_settlement_filetype81( \
+                        row_dst_8_F_e_future_data.extract_settlement_filetype81( \
                             instrument['spanticksize'], instrument['spantickdisplay'])
 
                     elif data_row_type == SPAN_FILE_ROW_TYPES.TYPE_82:
 
-                        row_dst_8_F_e.extract_settlement_filetype82( \
+                        row_dst_8_F_e_future_data.extract_settlement_filetype82( \
                             instrument['spanticksize'], instrument['spantickdisplay'])
 
 
                     row_dstBe_future = \
-                        rowListTypeB_Future_dict[row_dst_8_F_e.future_contract_month, row_dst_8_F_e.future_contract_year]
+                        rowListTypeB_Future_dict[row_dst_8_F_e_future_data.future_contract_month, row_dst_8_F_e_future_data.future_contract_year]
 
-                    row_dstBe_future.extracted_future_data_row = row_dst_8_F_e
+                    row_dstBe_future.extracted_future_data_row = row_dst_8_F_e_future_data
 
-                    '''print('********',
-                          row_dst_8_F_e.future_contract_month,
-                          '***',
-                          row_dst_8_F_e.future_contract_year,
-                          '***',
-                          row_dstBe.future_cqg_symbol,
-                          'settlement price',
-                          row_dst_8_F_e.settlement_price)'''
+                    #update future contract with settlement and date to mongo
+                    self.mongo_queries.fill_future_price(row_dst_8_F_e_future_data, row_dstBe_future)
 
-                        #update future contract with settlement and date to mongo
 
                 '''below imports the OPTION contract info'''
-                for row_dstBe in rowListTypeB:
+                for row_dstBe_option_info in rowListTypeB:
 
-                    row_dstBe.extract_commodity_product_code_identifiers()
+                    row_dstBe_option_info.extract_commodity_product_code_identifiers()
 
-                    if row_dstBe.commodity_product in \
-                            row_dstBe.instrument['span_cqg_codes_dict']:
-                        print('!@#',row_dstBe.instrument['span_cqg_codes_dict'][row_dstBe.commodity_product])
+                    if row_dstBe_option_info.commodity_product in \
+                            row_dstBe_option_info.instrument['span_cqg_codes_dict']:
+                        print('!@#',row_dstBe_option_info.instrument['span_cqg_codes_dict'][row_dstBe_option_info.commodity_product])
 
-                    if row_dstBe.product_type == SPAN_FILE_PRODUCT_TYPE_CODES.oof and \
-                        row_dstBe.commodity_product in \
-                            row_dstBe.instrument['span_cqg_codes_dict']:
+                    if row_dstBe_option_info.product_type == SPAN_FILE_PRODUCT_TYPE_CODES.oof and \
+                        row_dstBe_option_info.commodity_product in \
+                            row_dstBe_option_info.instrument['span_cqg_codes_dict']:
 
-                        row_dstBe.extract_future_identifiers()
+                        row_dstBe_option_info.extract_future_identifiers()
 
-                        row_dstBe.extract_option_identifiers_typeB()
+                        row_dstBe_option_info.extract_option_identifiers_typeB()
 
-                        row_dstBe.extract_option_expiration_and_timetoexp()
+                        row_dstBe_option_info.extract_option_expiration_and_timetoexp()
 
-                        row_dstBe.span_underlying_future_contract_props = \
-                            rowListTypeB_Future_dict[row_dstBe.future_contract_month, row_dstBe.future_contract_year]
+                        row_dstBe_option_info.span_underlying_future_contract_props = \
+                            rowListTypeB_Future_dict[row_dstBe_option_info.future_contract_month, row_dstBe_option_info.future_contract_year]
 
                         rowListTypeB_Option_dict[
-                            row_dstBe.option_contract_month, \
-                            row_dstBe.option_contract_year, \
-                            row_dstBe.commodity_product] = row_dstBe
+                            row_dstBe_option_info.option_contract_month, \
+                            row_dstBe_option_info.option_contract_year, \
+                            row_dstBe_option_info.commodity_product] = row_dstBe_option_info
 
                         #TimeSpan span = optionContractMonthDate - spanOptionContractProps.optionContractExpiration;
                         #if (span.TotalDays < 150)
                         #        spanOptionContractPropsList.Add(spanOptionContractProps)
 
+                        self.mongo_queries.fill_option_info(row_dstBe_option_info)
+
                 for row_dst_8_OOF_e in rowListType8_OOF:
-                    #print('****** row_dst_8_F_e ' + row_dst_8_F_e.product_type)
-                    #if row_dst_8_F_e.product_type == SPAN_FILE_PRODUCT_TYPE_CODES.oof:
+                    #print('****** row_dst_8_F_e_future_data ' + row_dst_8_F_e_future_data.product_type)
+                    #if row_dst_8_F_e_future_data.product_type == SPAN_FILE_PRODUCT_TYPE_CODES.oof:
 
                     row_dst_8_OOF_e.extract_option_identifiers_type8()
 
@@ -350,13 +325,13 @@ class CmeSpanImport(object):
 
 
                             '''print('********',
-                                  row_dst_8_F_e.future_contract_month,
+                                  row_dst_8_F_e_future_data.future_contract_month,
                                   '***',
-                                  row_dst_8_F_e.future_contract_year,
+                                  row_dst_8_F_e_future_data.future_contract_year,
                                   '***',
-                                  row_dstBe.future_cqg_symbol,
+                                  row_dstBe_option_info.future_cqg_symbol,
                                   'settlement price',
-                                  row_dst_8_F_e.settlement_price)'''
+                                  row_dst_8_F_e_future_data.settlement_price)'''
 
                             #update future contract with settlement and date to mongo
 

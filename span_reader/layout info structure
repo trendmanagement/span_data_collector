@@ -8,14 +8,10 @@
         self.future_contract_month_str
         self.future_contract_day_or_week_code
 
-            #self.expiration_str
-
         self.future_contract_month_date
         self.future_contract_month
         self.future_contract_month_char
         self.future_contract_year
-
-            #self.future_contract_expiration
 
         self.future_cqg_symbol
 
