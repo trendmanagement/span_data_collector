@@ -1,5 +1,5 @@
         self.line
-        self.instrument
+        self.instrument #this is a dictionary
 
         self.row_exchg
         self.underlying

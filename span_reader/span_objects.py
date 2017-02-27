@@ -87,8 +87,15 @@ class DataSpanType_8_Extract:
 
             #print("&&&&&&&&&&&&&&&&&&& " + str(self.option_strike_price))
 
-            self.option_cqg_symbol = SPAN_FILE_CONTRACT_TYPE.future + "." + self.instrument['cqgsymbol'] \
-                                     + self.option_contract_month_char + str(self.option_contract_year % 100)
+
+
+            self.option_cqg_symbol = self.option_type + ".US." + self.instrument['cqgsymbol'] \
+                                     + self.option_contract_month_char + str(self.option_contract_year % 100) \
+                                     + str(ConversionAndRounding.convertToStrikeForCQGSymbol(self, \
+                                                              self.option_strike_price, \
+                                                              self.instrument['optionstrikeincrement'], \
+                                                              self.instrument['spanstrikedisplay'], \
+                                                              self.instrument['idinstrument']))
 
         except:
             print("extract_rowtype_8 error")

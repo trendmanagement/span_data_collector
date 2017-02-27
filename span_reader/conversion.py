@@ -6,6 +6,19 @@ from math import floor
 class ConversionAndRounding:
     #def __init__(self):
 
+    def convertToStrikeForCQGSymbol(self, barVal = 0, tickIncrementIn = 0, tickDisplayIn = 0, idInstrument = 0):
+
+        if (idInstrument == 39 or idInstrument == 40): # GLE or HE
+
+            return int(barVal * tickDisplayIn)
+
+        elif (idInstrument == 1 or idInstrument == 360):
+
+            return int(barVal * tickDisplayIn)
+
+        else:
+            return int(ConversionAndRounding.convertToTickMovesDouble(barVal, tickIncrementIn, tickDisplayIn))
+
 
     def convertToTickMovesDouble(self, barVal = 0, tickIncrementIn = 0, tickDisplayIn = 0):
         '''

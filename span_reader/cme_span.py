@@ -244,29 +244,29 @@ class CmeSpanImport(object):
                         #if (span.TotalDays < 150)
                         #        spanOptionContractPropsList.Add(spanOptionContractProps)
 
-                        self.mongo_queries.fill_option_info(row_dstBe_option_info)
 
-                for row_dst_8_OOF_e in rowListType8_OOF:
+
+                for row_dst_8_OOF_e_option_data in rowListType8_OOF:
                     #print('****** row_dst_8_F_e_future_data ' + row_dst_8_F_e_future_data.product_type)
                     #if row_dst_8_F_e_future_data.product_type == SPAN_FILE_PRODUCT_TYPE_CODES.oof:
 
-                    row_dst_8_OOF_e.extract_option_identifiers_type8()
+                    row_dst_8_OOF_e_option_data.extract_option_identifiers_type8()
 
-                    if row_dst_8_OOF_e.commodity_product_code in \
-                            row_dst_8_OOF_e.instrument['span_cqg_codes_dict']:
+                    if row_dst_8_OOF_e_option_data.commodity_product_code in \
+                            row_dst_8_OOF_e_option_data.instrument['span_cqg_codes_dict']:
 
-                        row_dst_8_OOF_e.extract_future_identifiers()
+                        row_dst_8_OOF_e_option_data.extract_future_identifiers()
 
 
 
-                        key = (row_dst_8_OOF_e.option_contract_month, \
-                                row_dst_8_OOF_e.option_contract_year, \
-                                row_dst_8_OOF_e.commodity_product_code)
+                        key = (row_dst_8_OOF_e_option_data.option_contract_month, \
+                                row_dst_8_OOF_e_option_data.option_contract_year, \
+                                row_dst_8_OOF_e_option_data.commodity_product_code)
 
 
                         if key in rowListTypeB_Option_dict:
 
-                            row_dstBe_option = \
+                            row_dstBe_option_info = \
                                 rowListTypeB_Option_dict[key]
 
                             #if dst8e.option_type == SPAN_FILE_CONTRACT_TYPE.call:
@@ -285,55 +285,46 @@ class CmeSpanImport(object):
 
                             if data_row_type == SPAN_FILE_ROW_TYPES.TYPE_81:
 
-                                row_dst_8_OOF_e.extract_settlement_filetype81( \
+                                row_dst_8_OOF_e_option_data.extract_settlement_filetype81( \
                                     optionTickSize, \
                                     optionTickDisplay)
 
                             elif data_row_type == SPAN_FILE_ROW_TYPES.TYPE_82:
 
-                                row_dst_8_OOF_e.extract_settlement_filetype82( \
+                                row_dst_8_OOF_e_option_data.extract_settlement_filetype82( \
                                     optionTickSize, \
                                     optionTickDisplay)
 
 
 
-                            #row_dstBe_option.span_underlying_future_contract_props.extracted_future_data_row \
+                            #row_dstBe_option_info.span_underlying_future_contract_props.extracted_future_data_row \
                             #    .settlement_price
 
-                            print('$$$$$$$$$$',row_dstBe_option.product_type, row_dst_8_OOF_e.option_type, \
-                                                               row_dstBe_option.span_underlying_future_contract_props.extracted_future_data_row \
+                            print('$$$$$$$$$$',row_dstBe_option_info.product_type, row_dst_8_OOF_e_option_data.option_type, \
+                                                               row_dstBe_option_info.span_underlying_future_contract_props.extracted_future_data_row \
                                                                 .settlement_price, \
-                                                               row_dst_8_OOF_e.option_strike_price, \
-                                                               row_dstBe_option.option_time_to_exp, \
+                                                               row_dst_8_OOF_e_option_data.option_strike_price, \
+                                                               row_dstBe_option_info.option_time_to_exp, \
                                                                self.risk_free_rate, \
-                                                               row_dst_8_OOF_e.settlement_price, \
+                                                               row_dst_8_OOF_e_option_data.settlement_price, \
                                                                optionTickSize)
 
                             #calculate implied vol
 
-                            row_dst_8_OOF_e.implied_vol = \
-                                calculateOptionVolatilityNR(row_dst_8_OOF_e.option_type, \
-                                                               row_dstBe_option.span_underlying_future_contract_props.extracted_future_data_row \
+                            row_dst_8_OOF_e_option_data.implied_vol = \
+                                calculateOptionVolatilityNR(row_dst_8_OOF_e_option_data.option_type, \
+                                                               row_dstBe_option_info.span_underlying_future_contract_props.extracted_future_data_row \
                                                                 .settlement_price, \
-                                                               row_dst_8_OOF_e.option_strike_price, \
-                                                               row_dstBe_option.option_time_to_exp, \
+                                                               row_dst_8_OOF_e_option_data.option_strike_price, \
+                                                               row_dstBe_option_info.option_time_to_exp, \
                                                                self.risk_free_rate, \
-                                                               row_dst_8_OOF_e.settlement_price, \
+                                                               row_dst_8_OOF_e_option_data.settlement_price, \
                                                                optionTickSize)
 
-                            print('^^^^^^^^^^^',row_dst_8_OOF_e.implied_vol)
+                            print('^^^^^^^^^^^',row_dst_8_OOF_e_option_data.implied_vol)
 
-
-                            '''print('********',
-                                  row_dst_8_F_e_future_data.future_contract_month,
-                                  '***',
-                                  row_dst_8_F_e_future_data.future_contract_year,
-                                  '***',
-                                  row_dstBe_option_info.future_cqg_symbol,
-                                  'settlement price',
-                                  row_dst_8_F_e_future_data.settlement_price)'''
-
-                            #update future contract with settlement and date to mongo
+                            self.mongo_queries.fill_option_info_and_data(row_dst_8_OOF_e_option_data, \
+                                                                         row_dstBe_option_info)
 
 
 
