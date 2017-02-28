@@ -176,7 +176,7 @@ class MongoQueries():
             row_dstBe_option_info.idoption = int(idoption_doc['seq'])
             row_dstBe_option_info.option_objectid = _objectid
 
-            print('2222%%%%%%%%%%%%', row_dstBe_option_info.idcontract, row_dstBe_option_info.contract_objectid)
+            print('2222%%%%%%%%%%%%', row_dstBe_option_info.idoption, row_dstBe_option_info.option_objectid)
 
 
         doc_update_message = self.db.options_data.update({'idoption': row_dstBe_option_info.idoption, \

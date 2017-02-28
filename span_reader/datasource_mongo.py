@@ -34,6 +34,25 @@ class DataSourceMongo(object):
         except:
             return None
 
+    def get_instrument_list_from_id(self, idinstrument):
+        """
+            Gets the instrument list from the instrument collection
+            Parameters:
+              option_enabled - the option_enabled field in the db
+        """
+        try:
+            instrument_list_cursor = self.db.instruments.find({'idinstrument':idinstrument})
+
+            instrument_list = []
+
+            for instrument in instrument_list_cursor:
+                instrument_list.append(instrument)
+
+            return instrument_list
+
+        except:
+            return None
+
     def get_exchange_list(self):
         """
             Gets the exchange list from mongodb and create a dictionary with idexchange key

@@ -6,8 +6,8 @@ from pathlib import Path
 from datetime import datetime
 
 class InstrumentInfo(object):
-    def __init__(self, optionenabled):
-        self.fill_instrument_list(optionenabled)
+    def __init__(self, optionenabled = 0, idinstrument = 0):
+        self.fill_instrument_list(optionenabled, idinstrument)
 
     def get_instrument_list(self):
 
@@ -23,12 +23,15 @@ class InstrumentInfo(object):
         else:
             return {}
 
-    def fill_instrument_list(self, optionenabled):
+    def fill_instrument_list(self, optionenabled, idinstrument):
         #print(MONGO_CONNSTR)
 
         data_source_mongo = DataSourceMongo(MONGO_CONNSTR, MONGO_EXO_DB)
 
-        self.instrument_list = data_source_mongo.get_instrument_list(optionenabled)
+        if optionenabled != 0:
+            self.instrument_list = data_source_mongo.get_instrument_list(optionenabled)
+        elif idinstrument != 0:
+            self.instrument_list = data_source_mongo.get_instrument_list_from_id(idinstrument)
 
         #print(self.instrument_list)
 

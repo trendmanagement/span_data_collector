@@ -13,7 +13,6 @@ from span_reader.span_input_constants import *
 from pathlib import Path'''
 
 from span_reader.instrument_info import InstrumentInfo
-from collections import namedtuple
 from span_reader.span_objects import *
 from span_reader.option_calcs import calculateOptionVolatilityNR
 from span_reader.mongo_queries import MongoQueries
@@ -28,31 +27,30 @@ class CmeSpanImport(object):
 
         if args != None:
             self.args = args
-            self.filepath = args.filepath
-            self.optionenabled = args.optionenabled
-        else:
-            self.filepath = "C:\\Users\\Steve Pickering\\Desktop\\span_data_collector\\cme.20170106.c.pa2"
-            self.optionenabled = 2
+            self.optionenabled = args['optionenabled']
+            self.risk_free_rate = args['risk_free_rate']
 
-        self.short_file_name = ntpath.basename(self.filepath)
+        else:
+            self.optionenabled = 2
+            self.risk_free_rate = 0.01
 
         self.mongo_queries = MongoQueries()
+
+        self.instrumentInfo = InstrumentInfo(optionenabled=self.optionenabled)
+
+
+
+
+    def load_span_file(self, filepath):
+        """
+            Reads and loads the span file into the mongodb
+        """
+        self.filepath = filepath
+        self.short_file_name = ntpath.basename(self.filepath)
 
         print(self.short_file_name)
 
         print(self.filepath)
-
-        self.instrumentInfo = InstrumentInfo(self.optionenabled)
-
-        self.risk_free_rate = 0.01
-
-
-    def load_span_file(self):
-        """
-            Reads and loads the span file into the mongodb
-        """
-
-
 
         if os.path.exists(self.filepath):
 
@@ -325,19 +323,6 @@ class CmeSpanImport(object):
 
                             self.mongo_queries.fill_option_info_and_data(row_dst_8_OOF_e_option_data, \
                                                                          row_dstBe_option_info)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
