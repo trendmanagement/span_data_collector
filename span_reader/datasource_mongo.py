@@ -13,7 +13,7 @@ class DataSourceMongo(object):
         self.db = self.client[dbname]
 
         # Creating indexes for fast data fetching
-        #self.db.futures_data.create_index([('idcontract', pymongo.ASCENDING),('datetime', pymongo.ASCENDING)])
+        self.db.futures_contract_settlements.create_index([('idcontract', pymongo.ASCENDING),('datetime', pymongo.ASCENDING)])
 
     def get_instrument_list(self, option_enabled):
         """

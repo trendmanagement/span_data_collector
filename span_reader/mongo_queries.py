@@ -91,7 +91,7 @@ class MongoQueries():
               future_contract_data.span_file_date_time,
               future_contract_data.settlement_price)
 
-        doc_update_message = self.db.futures_data.update({'idcontract': future_contract_info.idcontract, \
+        doc_update_message = self.db.futures_contract_settlements.update({'idcontract': future_contract_info.idcontract, \
                                                        'date': future_contract_data.span_file_date_time}, \
                                                         {'$set': {'settlement': future_contract_data.settlement_price, \
                                                                   'contract_objectid': future_contract_info.contract_objectid}}, \
