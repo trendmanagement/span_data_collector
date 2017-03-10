@@ -48,9 +48,9 @@ class CmeSpanImport(object):
         self.filepath = filepath
         self.short_file_name = ntpath.basename(self.filepath)
 
-        print(self.short_file_name)
+        #print(self.short_file_name)
 
-        print(self.filepath)
+        #print(self.filepath)
 
         if os.path.exists(self.filepath):
 
@@ -58,7 +58,7 @@ class CmeSpanImport(object):
 
             file_lines = file_object.readlines()
 
-            print('test ', self.filepath)
+            #print('test ', self.filepath)
 
             data_row_type = SPAN_FILE_ROW_TYPES.TYPE_NULL
 
@@ -74,7 +74,7 @@ class CmeSpanImport(object):
 
                 rowListTypeMAIN = [];
 
-                print(instrument['symbol'])
+                #print(instrument['symbol'])
 
                 for line in file_lines:
 
@@ -190,12 +190,12 @@ class CmeSpanImport(object):
 
                             #self.mongo_queries.fill_future_info(row_dstBe_option_info)
 
-                            print(contract_info_idcontract)
+                            #print(contract_info_idcontract)
 
                             row_dstBe_option_info.idcontract = contract_info_idcontract
 
-                            print('&&&&&&&&&&',
-                                  row_dstBe_option_info.idcontract)
+                            #print('&&&&&&&&&&',
+                            #      row_dstBe_option_info.idcontract)
 
 
                 '''gets future contract settlements'''
@@ -205,7 +205,7 @@ class CmeSpanImport(object):
 
                     row_dst_8_F_e_future_data.extract_future_identifiers()
 
-                    print('ticksize, display', instrument['spanticksize'], instrument['spantickdisplay'])
+                    #print('ticksize, display', instrument['spanticksize'], instrument['spantickdisplay'])
 
                     if data_row_type == SPAN_FILE_ROW_TYPES.TYPE_81:
 
@@ -242,9 +242,9 @@ class CmeSpanImport(object):
 
                     row_dstBe_option_info.extract_commodity_product_code_identifiers()
 
-                    if row_dstBe_option_info.commodity_product in \
-                            row_dstBe_option_info.instrument['span_cqg_codes_dict']:
-                        print('!@#',row_dstBe_option_info.instrument['span_cqg_codes_dict'][row_dstBe_option_info.commodity_product])
+                    #if row_dstBe_option_info.commodity_product in \
+                    #        row_dstBe_option_info.instrument['span_cqg_codes_dict']:
+                    #    print('!@#',row_dstBe_option_info.instrument['span_cqg_codes_dict'][row_dstBe_option_info.commodity_product])
 
                     if row_dstBe_option_info.product_type == SPAN_FILE_PRODUCT_TYPE_CODES.oof and \
                         row_dstBe_option_info.commodity_product in \
@@ -323,7 +323,7 @@ class CmeSpanImport(object):
 
                             #row_dstBe_option_info.span_underlying_future_contract_props.extracted_future_data_row \
                             #    .settlement_price
-
+                            '''
                             print('$$$$$$$$$$',row_dstBe_option_info.product_type, row_dst_8_OOF_e_option_data.option_type, \
                                                                row_dstBe_option_info.span_underlying_future_contract_props.extracted_future_data_row \
                                                                 .settlement_price, \
@@ -332,6 +332,7 @@ class CmeSpanImport(object):
                                                                self.risk_free_rate, \
                                                                row_dst_8_OOF_e_option_data.settlement_price, \
                                                                optionTickSize)
+                                                               '''
 
                             #calculate implied vol
 
@@ -345,7 +346,7 @@ class CmeSpanImport(object):
                                                                row_dst_8_OOF_e_option_data.settlement_price, \
                                                                optionTickSize)
 
-                            print('^^^^^^^^^^^',row_dst_8_OOF_e_option_data.implied_vol)
+                            #print('^^^^^^^^^^^',row_dst_8_OOF_e_option_data.implied_vol)
 
                             option_info_dict = \
                             {
