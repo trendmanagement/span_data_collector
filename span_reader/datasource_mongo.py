@@ -1,4 +1,4 @@
-
+import warnings
 import pymongo
 
 class DataSourceMongo(object):
@@ -73,3 +73,28 @@ class DataSourceMongo(object):
 
         except:
             return exchange_dict
+
+    def get_expiration_date(self, idinstrument, year, monthint, contr_type):
+        """
+        Gets contract expiration for particular future or option contract
+        :param idinstrument:
+        :param year:
+        :param monthint:
+        :param contr_type:
+        :return:
+        """
+        result = self.db.contractexpirations.find_one({'idinstrument': idinstrument,
+                                          'optionyear': year,
+                                          'optionmonthint': monthint,
+                                          'contracttype': contr_type
+                                          })
+        if result is None:
+            if year > 2012:
+                warnings.warn('Expiration not found for: '
+                              'Instrument {0} Year: {1} Month: {2} ContrType: {3}'.format(idinstrument,
+                                                                                          year,
+                                                                                          monthint,
+                                                                                          contr_type))
+            return None
+        else:
+            return result['expirationdate']

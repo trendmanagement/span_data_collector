@@ -3,6 +3,7 @@ This is the main class for importing data from the CME SPAN FILES
 """
 import os.path
 import ntpath
+
 '''import logging
 import json
 from pprint import pprint
@@ -15,8 +16,21 @@ from pathlib import Path'''
 import pandas as pd
 from span_reader.instrument_info import InstrumentInfo
 from span_reader.span_objects import *
-from span_reader.option_calcs import calculateOptionVolatilityNR
+from span_reader.option_calcs import calculateOptionVolatilityNR, to_expiration_years
 from span_reader.mongo_queries import MongoQueries
+from span_reader.datasource_mongo import DataSourceMongo
+from span_reader.settings import *
+import warnings
+import numpy as np
+
+
+class IceFutureInfo:
+    """
+    Mock class used to communicate with MongoQueries, has dict_base attributes
+    """
+
+    def __init__(self, info_dict):
+        self.__dict__ = info_dict
 
 
 class IceSpanImport(object):
@@ -24,7 +38,7 @@ class IceSpanImport(object):
         The object that contains methods to import span data into mongodb
     """
 
-    def __init__(self, args = None):
+    def __init__(self, args=None):
 
         if args != None:
             self.args = args
@@ -36,8 +50,300 @@ class IceSpanImport(object):
             self.risk_free_rate = 0.01
 
         self.mongo_queries = MongoQueries()
+        self.datasource = DataSourceMongo(MONGO_CONNSTR, MONGO_EXO_DB)
 
-        self.instrumentInfo = InstrumentInfo(idinstrument=self.idinstrument)
+        self.instrumentInfo = InstrumentInfo(idinstrument=self.idinstrument).instrument_list[0]
+
+
+    def get_month_by_code(self, month_letter):
+        """
+        http://www.cmegroup.com/month-codes.html
+        January	F
+        February	G
+        March	H
+        April	J
+        May	K
+        June	M
+        July	N
+        August	Q
+        September	U
+        October	V
+        November	X
+        December	Z
+        :param month_letter:
+        :return:
+        """
+        month_letters = {
+            'F': 1, 'G': 2, 'H': 3, 'J': 4, 'K': 5, 'M': 6, 'N': 7, 'Q': 8, 'U': 9, 'V': 10, 'X': 11, 'Z': 12}
+        return month_letters[month_letter.upper()]
+
+    def get_code_by_month(self, month_year_str):
+        """
+        Get month code from 'StripName' field May18 -> 'K'
+        :param month_year_str:
+        :return:
+        """
+        month_name = month_year_str[:3]
+        month_letters = {
+            'Jan': 'F',
+            'Feb': 'G',
+            'Mar': 'H',
+            'Apr': 'J',
+            'May': 'K',
+            'Jun': 'M',
+            'Jul': 'N',
+            'Aug': 'Q',
+            'Sep': 'U',
+            'Oct': 'V',
+            'Nov': 'X',
+            'Dec': 'Z'}
+
+        return month_letters[month_name]
+
+    def get_year(self, month_year_str):
+        """
+        Get year from 'StripName' field May18 -> 2018
+        :param month_year_str:
+        :return:
+        """
+        yr = int(month_year_str[-2:])
+        if yr > 50:
+            return 1900 + yr
+        else:
+            return 2000 + yr
+
+    def get_cqg_name_futures(self, df_row):
+        """
+        Produces CQG name of the futures
+        """
+        return 'F.{0}{1}{2}'.format(self.instrumentInfo['cqgsymbol'],
+                                    df_row['month'],
+                                    df_row['year'] % 100
+                                    )
+
+    def get_contract_name_futures(self, df_row):
+        """
+        Produces contract name of the future
+        """
+        return 'F.US.{0}{1}{2}'.format(self.instrumentInfo['cqgsymbol'],
+                                       df_row['month'],
+                                       df_row['year'] % 100
+                                       )
+
+    def get_cqg_name_options(self, df_row):
+        """
+        Produces contract and CQG (the same) name for the option
+        :param df_row:
+        :return:
+        """
+        return '{0}.US.{1}{2}{3}{4}'.format(df_row['OptionType'].upper(),
+                                            self.instrumentInfo['cqgsymbol'],
+                                            df_row['month'],
+                                            df_row['year'] % 100,
+                                            ConversionAndRounding.convertToStrikeForCQGSymbol(df_row['StrikePrice'],
+                                                                                              self.instrumentInfo[
+                                                                                                  'optionstrikeincrement'],
+                                                                                              self.instrumentInfo[
+                                                                                                  'spanstrikedisplay'],
+                                                                                              self.instrumentInfo[
+                                                                                                  'idinstrument']),
+                                            )
+
+    def get_expiration_date(self, df_row, contr_type):
+        """
+        Fill expirations for option or future contract
+        :param df_row:
+        :param contr_type:
+        :return:
+        """
+        return self.datasource.get_expiration_date(self.instrumentInfo['idinstrument'],
+                                                   df_row['year'],
+                                                   df_row['monthint'],
+                                                   contr_type)
+
+    def process_futures_info(self, futures_df):
+        """
+        Aggregate information for futures contracts to meta-data dataframe
+        :param futures_df:
+        :return:
+        """
+        futures_df['MarketID'] = futures_df['MarketID'].astype(str)
+        grp = futures_df.groupby(by='MarketID').last()
+        grp['year'] = grp['StripName'].apply(self.get_year)
+        grp['month'] = grp['StripName'].apply(self.get_code_by_month)
+        grp['monthint'] = grp['month'].apply(self.get_month_by_code)
+        grp['expiration'] = grp.apply(self.get_expiration_date, axis=1, args=(1,))
+        grp['cqgname'] = grp.apply(self.get_cqg_name_futures, axis=1)
+        grp['contractname'] = grp.apply(self.get_contract_name_futures, axis=1)
+        grp = grp.dropna(subset=['StripName'])
+        return grp
+
+    def save_futures_info(self, futures_info):
+        """
+        {
+            "contractname" : "F.US.CLEM83",
+            "expirationdate" : ISODate("1983-05-20T00:00:00.000Z"),
+            "month" : "M",
+            "idinstrument" : 21,
+            "cqgsymbol" : "F.CLEM83",
+            "year" : 1983,
+            "monthint" : 6
+            #"idcontract" : 1, # Not required
+        }
+        """
+        for fdf_idx, fdict in futures_info.iterrows():
+            if pd.isnull(fdict['expiration']):
+                continue
+            info_dict = {
+                "contractname": fdict['contractname'],
+                "expirationdate": fdict['expiration'],
+                "month": fdict['month'],
+                "idinstrument": self.instrumentInfo['idinstrument'],
+                "cqgsymbol": fdict['cqgname'],
+                "year": fdict['year'],
+                "monthint": fdict['monthint'],
+            }
+            contract_id = self.mongo_queries.save_future_info(info_dict)
+
+            assert contract_id is not None
+            futures_info.at[fdf_idx, 'idcontract'] = contract_id
+
+    def process_options_info(self, options_df):
+        """
+        Aggregate information for options contracts to meta-data dataframe
+        :param options_df:
+        :return:
+        """
+
+        options_df['UnderlyingMarketID'] = options_df['UnderlyingMarketID'].astype(str)
+        grp_opt = options_df.groupby(by='OptionMarketID').last()
+        grp_opt['year'] = grp_opt['StripName'].apply(self.get_year)
+        grp_opt['month'] = grp_opt['StripName'].apply(self.get_code_by_month)
+        grp_opt['monthint'] = grp_opt['month'].apply(self.get_month_by_code)
+        grp_opt['expiration'] = grp_opt.apply(self.get_expiration_date, axis=1, args=(2,))
+        grp_opt['contractname'] = grp_opt.apply(self.get_cqg_name_options, axis=1)
+        grp_opt['cqgname'] = grp_opt.apply(self.get_cqg_name_options, axis=1)
+        return grp_opt
+
+    def save_options_info(self, options_info, futures_info):
+
+        for odf_idx, odict in options_info.iterrows():
+            try:
+                fut_contract_data = futures_info.loc[odict['UnderlyingMarketID']]
+                fut_contract_id = fut_contract_data['idcontract']
+            except KeyError:
+                warnings.warn("Can't find underlying option contract for OptionMarketID: {0}".format(odf_idx))
+                continue
+
+            options_info.at[odf_idx, 'idcontract'] = fut_contract_id
+
+            if pd.isnull(odict['expiration']):
+                continue
+
+            info_dict = {
+                "expirationdate": odict['expiration'],
+                "idinstrument": self.instrumentInfo['idinstrument'],
+                "strikeprice": odict['StrikePrice'],
+                "callorput": odict['OptionType'].upper(),
+                "optionname": odict['contractname'],
+                "optionmonthint": odict['monthint'],
+                "cqgsymbol": odict['cqgname'],
+                "idcontract": fut_contract_id,
+                "optionmonth": odict['month'],
+                "optionyear": odict['year'],
+            }
+            option_id = self.mongo_queries.save_option_info(info_dict)
+
+            assert option_id is not None
+            options_info.at[odf_idx, 'idoption'] = option_id
+
+    def save_futures_settlements(self, futures_df, futures_info):
+        """
+        Process futures dataframe and save settlements prices
+        :param futures_df: raw quotes DataFrame
+        :param futures_info: futures info DataFrame
+        :return:
+        """
+        for fidx, fdict in futures_df.iterrows():
+            settle_px = fdict['SettlementPrice']
+            if np.isnan(settle_px):
+                continue
+
+            oi = fdict['OpenInterest']
+            oi = 0 if np.isnan(oi) else oi
+            volume = fdict['Volume']
+            volume = 0 if np.isnan(volume) else volume
+            dt = fidx
+            if pd.isnull(dt):
+                continue
+
+            contract_id = futures_info.loc[fdict['MarketID']]['idcontract']
+            assert contract_id is not None
+
+            info_dict = {'idcontract': contract_id,
+                         'settlement': settle_px,
+                         'openinterest': oi,
+                         'volume': volume,
+                         'date': dt}
+            self.mongo_queries.save_futures_settlement(info_dict)
+
+    def save_options_quotes(self, options_df, options_info, futures_df):
+        """
+        Save options quotes
+        :param options_df: options quotes DataFrame
+        :param options_info: options info DataFrame
+        :param futures_df: futures quotes DataFrame (used for fetching underlying prices)
+        :return:
+        """
+        optionTickSize = self.instrumentInfo['spanoptionticksize']
+        if self.instrumentInfo['secondaryoptionticksizerule'] > 0:
+            optionTickSize = self.instrumentInfo['secondaryoptionticksize']
+
+        for opt_current_date, odict in options_df.iterrows():
+            opt_settle_px = odict['SettlementPrice']
+            if np.isnan(opt_settle_px):
+                continue
+
+            option_info_data = options_info.loc[odict['OptionMarketID']]
+            idoption = option_info_data['idoption']
+            option_expiration = option_info_data['expiration']
+            if np.isnan(idoption):
+                # Skip options without underlying futures
+                continue
+
+            assert idoption > 0
+
+            if pd.isnull(option_expiration) or pd.isnull(opt_current_date):
+                continue
+
+
+            try:
+                fut_contract_data = futures_df[futures_df['MarketID'] == odict['UnderlyingMarketID']].ix[opt_current_date]
+                underlying_px = fut_contract_data['SettlementPrice']
+            except KeyError:
+                continue
+
+            opt_timetoexp_in_years = to_expiration_years(option_expiration, opt_current_date)
+            iv = calculateOptionVolatilityNR(odict['OptionType'],
+                                             underlying_px,
+                                             odict['StrikePrice'],
+                                             opt_timetoexp_in_years,
+                                             self.risk_free_rate,
+                                             opt_settle_px,
+                                             optionTickSize
+                                             )
+
+            assert iv >= 0
+            assert not np.isnan(iv)
+
+            info_dict = {
+                "timetoexpinyears": opt_timetoexp_in_years,
+                "idoption": idoption,
+                "price": opt_settle_px,
+                "datetime": opt_current_date,
+                "impliedvol": iv,
+            }
+            self.mongo_queries.save_options_data(info_dict)
 
 
     def load_span_file(self, futures_filepath, options_filepath):
@@ -46,39 +352,24 @@ class IceSpanImport(object):
         """
         self.futures_filepath = futures_filepath
         self.options_filepath = options_filepath
-        #self.short_file_name = ntpath.basename(self.futures_filepath)
-
-        #print(self.short_file_name)
-
-        #print(self.futures_filepath)
-
 
         if os.path.exists(self.futures_filepath) and os.path.exists(self.options_filepath):
 
-            futures_object = pd.read_csv(self.futures_filepath, error_bad_lines=False)
+            futures_df = pd.read_csv(self.futures_filepath, error_bad_lines=False, parse_dates=[0],
+                                          usecols=range(19), index_col=0)
+            options_df = pd.read_csv(self.options_filepath, error_bad_lines=False, parse_dates=[0], index_col=0)
 
-            options_object = pd.read_csv(options_filepath, error_bad_lines=False)
+            # Process futures and options meta-information
+            futures_info = self.process_futures_info(futures_df)
+            options_info = self.process_options_info(options_df)
+            # Saving info to mongo
+            # and populating contracts IDs
+            self.save_futures_info(futures_info)
+            self.save_options_info(options_info, futures_info)
 
-            instrument = self.instrumentInfo.instrument_list[0]
+            # Processing settlements prices
+            self.save_options_quotes(options_df, options_info, futures_df)
+            self.save_futures_settlements(futures_df, futures_info)
 
-            '''
-            notes: on my local machine i created a collection counters that i seeded with the the current max values
-            of idcontract and idoption
-
-            1. get future contracts
-            2. there are no expiration dates in these files, so we have a table tblcontractexpirations that we use to
-             to get the expiration dates of the contracts, we will have to move this table to mongo
-            3. fill the contracts collection with the future info (create the correct symbol for CQG, future data into the appropriate fields in mongo
-            4. go through the options, find the underlying future (we can't always use the UnderlyingMarketID from the
-             option file because they don't link to a future for serial month options)
-            5. calculate the timetoexpinyears and the impliedvol
-
-            updated notes are in the word doc
-
-
-            '''
-
-
-
-
-
+        else:
+            raise Exception("Files not found")

@@ -59,6 +59,10 @@ import numpy as np
 
     return tempV'''
 
+
+def to_expiration_years(expiration_date, current_date):
+    return (expiration_date.date() - current_date.date()).total_seconds() / 31536000.0  # == (365.0 * 24 * 60 * 60)
+
 def calculateOptionVolatilityNR(callPutFlag, ulprice, strike, toexpiry, riskfreerate, currentOptionPrice, tickSize):
 
     return calculateOptionVolatilityNRCalc(callPutFlag, ulprice, strike, toexpiry, riskfreerate, currentOptionPrice,
@@ -120,12 +124,11 @@ def calculateOptionVolatilityNRCalc(callPutFlag, ulprice, strike, toexpiry, risk
 
             if i == maxIter:
                 vi = prevVi
+        return vi
 
     except:
-
         if math.isinf(vi) or vi < 0 or math.isnan(vi):
             return 0
-
         else:
             return vi
 
