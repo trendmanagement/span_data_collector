@@ -133,10 +133,17 @@ class MongoQueries():
             "idcontract" : 738,
             "optionmonth" : "G",
             "optionyear" : 2011
+            "optioncode" :
         }
         :return:
         """
-        return self._save_mongo_dict('options',
+
+        if ('optcod' in info_dict and info_dict['optcod'].strip() != ''):
+            return self._save_mongo_dict('options',
+                                         ['optionmonthint', 'optionyear', 'strikeprice', 'idinstrument', 'callorput','optcod'],
+                                         info_dict, COUNTER_OPTIONS)
+        else:
+            return self._save_mongo_dict('options',
                                      ['optionmonthint', 'optionyear', 'strikeprice', 'idinstrument', 'callorput'],
                                      info_dict, COUNTER_OPTIONS)
 
@@ -205,9 +212,9 @@ class MongoQueries():
         if (doc_update_message != None):
 
             future_contract_info.idcontract = doc_update_message['idcontract']
-            future_contract_info.contract_objectid = doc_update_message['_id']
+            #future_contract_info.contract_objectid = doc_update_message['_id']
 
-            print('%%%%%%%%%%%%', future_contract_info.idcontract, future_contract_info.contract_objectid)
+            print('%%%%%%%%%%%%', future_contract_info.idcontract)
 
         # if(doc_update_message['updatedExisting'] == False):
         else:
@@ -231,9 +238,9 @@ class MongoQueries():
             print(_objectid)
 
             future_contract_info.idcontract = int(idcontract_doc['seq'])
-            future_contract_info.contract_objectid = _objectid
+            #future_contract_info.contract_objectid = _objectid
 
-            print('2222%%%%%%%%%%%%', future_contract_info.idcontract, future_contract_info.contract_objectid)
+            print('2222%%%%%%%%%%%%', future_contract_info.idcontract)
 
 
     def fill_future_price(self, future_contract_data, future_contract_info):
@@ -241,15 +248,14 @@ class MongoQueries():
 
         print('&&&&&&&&&&',
               future_contract_info.idcontract,
-              future_contract_info.contract_objectid,
+              #future_contract_info.contract_objectid,
               future_contract_data.span_file_date_time,
               future_contract_data.settlement_price)
 
         doc_update_message = self.db.futures_contract_settlements.update({'idcontract': future_contract_info.idcontract, \
                                                                           'date': future_contract_data.span_file_date_time}, \
                                                                          {'$set': {
-                                                                             'settlement': future_contract_data.settlement_price, \
-                                                                             'contract_objectid': future_contract_info.contract_objectid}}, \
+                                                                             'settlement': future_contract_data.settlement_price}}, \
                                                                          upsert=True)
 
         print('###############', doc_update_message)
@@ -267,7 +273,7 @@ class MongoQueries():
                  # 'optioncode': row_dst_8_OOF_e_option_data.option_span_cqg_code['optcod'] \
                  },
                 {'$set': {'idcontract': row_dstBe_option_info.span_underlying_future_contract_props.idcontract, \
-                          'contract_objectid': row_dstBe_option_info.span_underlying_future_contract_props.contract_objectid, \
+                          #'contract_objectid': row_dstBe_option_info.span_underlying_future_contract_props.contract_objectid, \
                           'optionname': row_dst_8_OOF_e_option_data.option_cqg_symbol, \
                           'cqgsymbol': row_dst_8_OOF_e_option_data.option_cqg_symbol, \
                           'expirationdate': row_dstBe_option_info.option_contract_expiration}}, \
@@ -284,7 +290,7 @@ class MongoQueries():
                  'optioncode': row_dst_8_OOF_e_option_data.option_span_cqg_code['optcod'] \
                  },
                 {'$set': {'idcontract': row_dstBe_option_info.span_underlying_future_contract_props.idcontract, \
-                          'contract_objectid': row_dstBe_option_info.span_underlying_future_contract_props.contract_objectid, \
+                          #'contract_objectid': row_dstBe_option_info.span_underlying_future_contract_props.contract_objectid, \
                           'optionname': row_dst_8_OOF_e_option_data.option_cqg_symbol, \
                           'cqgsymbol': row_dst_8_OOF_e_option_data.option_cqg_symbol, \
                           'expirationdate': row_dstBe_option_info.option_contract_expiration}}, \
@@ -296,7 +302,7 @@ class MongoQueries():
         if (doc_update_message != None):
 
             row_dstBe_option_info.idoption = doc_update_message['idoption']
-            row_dstBe_option_info.option_objectid = doc_update_message['_id']
+            #row_dstBe_option_info.option_objectid = doc_update_message['_id']
 
             print('%%%%%%%%%%%%')
 
@@ -319,7 +325,7 @@ class MongoQueries():
                                                 'idinstrument': row_dst_8_OOF_e_option_data.instrument['idinstrument'], \
                                                 'expirationdate': row_dstBe_option_info.option_contract_expiration, \
                                                 'idcontract': row_dstBe_option_info.span_underlying_future_contract_props.idcontract, \
-                                                'contract_objectid': row_dstBe_option_info.span_underlying_future_contract_props.contract_objectid, \
+                                                #'contract_objectid': row_dstBe_option_info.span_underlying_future_contract_props.contract_objectid, \
                                                 'cqgsymbol': row_dst_8_OOF_e_option_data.option_cqg_symbol, \
                                                 'optioncode': row_dst_8_OOF_e_option_data.option_span_cqg_code[
                                                     'optcod'], \
@@ -328,15 +334,14 @@ class MongoQueries():
             print(_objectid)
 
             row_dstBe_option_info.idoption = int(idoption_doc['seq'])
-            row_dstBe_option_info.option_objectid = _objectid
+            #row_dstBe_option_info.option_objectid = _objectid
 
-            print('2222%%%%%%%%%%%%', row_dstBe_option_info.idoption, row_dstBe_option_info.option_objectid)
+            print('2222%%%%%%%%%%%%', row_dstBe_option_info.idoption)
 
         doc_update_message = self.db.options_data.update({'idoption': row_dstBe_option_info.idoption, \
                                                           'datetime': row_dst_8_OOF_e_option_data.span_file_date_time}, \
                                                          {'$set': {
                                                              'price': row_dst_8_OOF_e_option_data.settlement_price, \
                                                              'impliedvol': row_dst_8_OOF_e_option_data.implied_vol, \
-                                                             'timetoexpinyears': row_dstBe_option_info.option_time_to_exp, \
-                                                             'option_objectid': row_dstBe_option_info.option_objectid}}, \
+                                                             'timetoexpinyears': row_dstBe_option_info.option_time_to_exp}}, \
                                                          upsert=True)

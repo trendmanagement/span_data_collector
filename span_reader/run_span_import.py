@@ -3,7 +3,7 @@ from span_reader.ice_span import IceSpanImport
 
 input_args = {}
 
-'''
+
 input_args['risk_free_rate'] = 0.01
 
 
@@ -28,3 +28,4 @@ futures_filepath = "/home/ubertrader/Dropbox/tmqrexo/notebooks/development/ice_i
 options_filepath = "/home/ubertrader/Dropbox/tmqrexo/notebooks/development/ice_import/options/EOD_Options_578_2017.csv"
 
 csi.load_span_file(futures_filepath, options_filepath)
+'''
