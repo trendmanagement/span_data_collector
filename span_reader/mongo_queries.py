@@ -182,6 +182,21 @@ class MongoQueries():
                                      info_dict)
 
 
+    def get_risk_free_rate(self, date):
+        #oid_cur = self.db['option_input_data'].find({'idoptioninputsymbol':15,'optioninputdatetime':{'$lte':date}}) \
+        #        .sort({'optioninputdatetime':-1}).limit(1)
+
+        oid_cur = self.db['option_input_data'].find({'idoptioninputsymbol': 15,'optioninputdatetime':{'$lte':date}}).sort('optioninputdatetime',pymongo.DESCENDING).limit(1)
+
+        ir = 0.01
+        for oid_obj in oid_cur:
+            ir = oid_obj['optioninputclose']/100
+            break
+
+        print(ir)
+
+        return ir
+
     #
     # OLD Code
     #

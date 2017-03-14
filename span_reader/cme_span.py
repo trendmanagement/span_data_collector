@@ -36,6 +36,8 @@ class CmeSpanImport(object):
 
         self.mongo_queries = MongoQueries()
 
+
+
         self.instrumentInfo = InstrumentInfo(optionenabled=self.optionenabled)
 
 
@@ -74,7 +76,7 @@ class CmeSpanImport(object):
 
                 rowListTypeMAIN = [];
 
-                #print(instrument['symbol'])
+                print('running',instrument['symbol'])
 
                 for line in file_lines:
 
@@ -92,7 +94,7 @@ class CmeSpanImport(object):
                             self.extract_rowtype_0(line_in = line, instrument_symbol = instrument)
 
                         '''get the interest rate from the database after date is extracted from rowtype_0'''
-                        self.interest_rate = 0
+                        self.interest_rate = self.mongo_queries.get_risk_free_rate(self.span_file_date_time)
 
                         '''update the instrument info specific to the current date'''
                         self.instrumentInfo.update_instrument_list(instrument,self.span_file_date_time)
@@ -380,6 +382,7 @@ class CmeSpanImport(object):
 
                             id_option = self.mongo_queries.save_options_data(option_data_dict)
 
+                print('finished', instrument['symbol'])
 
 
 
