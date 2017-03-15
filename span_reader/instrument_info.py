@@ -64,8 +64,11 @@ class InstrumentInfo(object):
 
 
         for instrument in self.instrument_list:
-
-            instrument['exchange'] = self.exchange_dict[instrument['idexchange']]
+            try:
+                instrument['exchange'] = self.exchange_dict[instrument['idexchange']]
+            except:
+                instrument['exchange'] = 0
+                print("Exchange is not found: {0}".format(instrument['idexchange']))
 
             #print(instrument['exchange'])
 

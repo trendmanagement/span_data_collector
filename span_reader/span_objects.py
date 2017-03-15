@@ -129,11 +129,11 @@ class DataSpanType_8_Extract:
                                    CME_SPAN_TYPE_8_1.settlement_price_start: \
                                        CME_SPAN_TYPE_8_1.settlement_price_end].strip()
 
-            print('settlement_price_str', settlement_price_str)
+            #print('settlement_price_str', settlement_price_str)
 
             self.settlement_price = self.settlement_find_closest_tick(settlement_price_str, tick_size, tick_display)
 
-            print('^^^settlement_price', self.settlement_price)
+            #print('^^^settlement_price', self.settlement_price)
         except:
             print("extract_rowtype_8 error")
             logging.exception("extract_rowtype_8  error")
@@ -146,11 +146,11 @@ class DataSpanType_8_Extract:
                 CME_SPAN_TYPE_8_2.settlement_price_start: \
                     CME_SPAN_TYPE_8_2.settlement_price_end].strip()
 
-            print('settlement_price_str', settlement_price_str)
+            #print('settlement_price_str', settlement_price_str)
 
             self.settlement_price = self.settlement_find_closest_tick(settlement_price_str, tick_size, tick_display)
 
-            print('^^^settlement_price', self.settlement_price)
+            #print('^^^settlement_price', self.settlement_price)
         except:
             print("extract_rowtype_8 error")
             logging.exception("extract_rowtype_8  error")
@@ -166,7 +166,7 @@ class DataSpanType_8_Extract:
 
             settlement_price_dec = float(settlement_price_str)
 
-            print("settlement_price_dec ", settlement_price_dec)
+            #print("settlement_price_dec ", settlement_price_dec)
 
             if settlement_price_dec >= 9999999:
                 return self.instrument['spanticksize']

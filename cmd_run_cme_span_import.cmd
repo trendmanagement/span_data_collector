@@ -1,0 +1,1 @@
+python.exe run_cme_span_import.py

@@ -48,7 +48,7 @@ class ConversionAndRounding:
 
             displayVal = float(barVal)
 
-            print('conversion', displayVal, barVal)
+            #print('conversion', displayVal, barVal)
 
             if displayVal < 0:
                 fuzzyZero = -tickIncrement / 1000
@@ -64,11 +64,11 @@ class ConversionAndRounding:
             incrMultiple = floor(res / tickIncrement + positiveFuzzyZero) * tickIncrement
 
             if (res < incrMultiple + positiveFuzzyZero and res > incrMultiple - positiveFuzzyZero):
-                print('conversion', res)
+                #print('conversion', res)
                 return res
 
             else:
-                print('conversion', (incrMultiple + tickIncrement))
+                #print('conversion', (incrMultiple + tickIncrement))
                 return incrMultiple + tickIncrement;
 
 

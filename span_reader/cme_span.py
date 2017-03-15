@@ -36,6 +36,8 @@ class CmeSpanImport(object):
 
         self.mongo_queries = MongoQueries()
 
+
+
         self.instrumentInfo = InstrumentInfo(optionenabled=self.optionenabled)
 
 
@@ -48,9 +50,9 @@ class CmeSpanImport(object):
         self.filepath = filepath
         self.short_file_name = ntpath.basename(self.filepath)
 
-        print(self.short_file_name)
+        #print(self.short_file_name)
 
-        print(self.filepath)
+        #print(self.filepath)
 
         if os.path.exists(self.filepath):
 
@@ -58,7 +60,7 @@ class CmeSpanImport(object):
 
             file_lines = file_object.readlines()
 
-            print('test ', self.filepath)
+            #print('test ', self.filepath)
 
             data_row_type = SPAN_FILE_ROW_TYPES.TYPE_NULL
 
@@ -74,7 +76,7 @@ class CmeSpanImport(object):
 
                 rowListTypeMAIN = [];
 
-                print(instrument['symbol'])
+                print('running',instrument['symbol'])
 
                 for line in file_lines:
 
@@ -92,7 +94,7 @@ class CmeSpanImport(object):
                             self.extract_rowtype_0(line_in = line, instrument_symbol = instrument)
 
                         '''get the interest rate from the database after date is extracted from rowtype_0'''
-                        self.interest_rate = 0
+                        self.interest_rate = self.mongo_queries.get_risk_free_rate(self.span_file_date_time)
 
                         '''update the instrument info specific to the current date'''
                         self.instrumentInfo.update_instrument_list(instrument,self.span_file_date_time)
@@ -174,12 +176,28 @@ class CmeSpanImport(object):
                         rowListTypeB_Future_dict[row_dstBe_option_info.future_contract_month,row_dstBe_option_info.future_contract_year] = row_dstBe_option_info
 
                         if len(row_dstBe_option_info.future_expiration_str) > 0:
+                            info_dict = \
+                            {
+                                "contractname": row_dstBe_option_info.future_cqg_symbol,
+                                "expirationdate": row_dstBe_option_info.future_contract_expiration,
+                                "month": row_dstBe_option_info.future_contract_month_char,
+                                "idinstrument": row_dstBe_option_info.instrument['idinstrument'],
+                                "cqgsymbol": row_dstBe_option_info.future_cqg_symbol,
+                                "year": row_dstBe_option_info.future_contract_year,
+                                "monthint": row_dstBe_option_info.future_contract_month
+                                # "idcontract" : 1, # Not required
+                            }
 
-                            self.mongo_queries.fill_future_info(row_dstBe_option_info)
+                            contract_info_idcontract = self.mongo_queries.save_future_info(info_dict)
 
-                            print('&&&&&&&&&&',
-                                  row_dstBe_option_info.idcontract,
-                                  row_dstBe_option_info.contract_objectid)
+                            #self.mongo_queries.fill_future_info(row_dstBe_option_info)
+
+                            #print(contract_info_idcontract)
+
+                            row_dstBe_option_info.idcontract = contract_info_idcontract
+
+                            #print('&&&&&&&&&&',
+                            #      row_dstBe_option_info.idcontract)
 
 
                 '''gets future contract settlements'''
@@ -189,7 +207,7 @@ class CmeSpanImport(object):
 
                     row_dst_8_F_e_future_data.extract_future_identifiers()
 
-                    print('ticksize, display', instrument['spanticksize'], instrument['spantickdisplay'])
+                    #print('ticksize, display', instrument['spanticksize'], instrument['spantickdisplay'])
 
                     if data_row_type == SPAN_FILE_ROW_TYPES.TYPE_81:
 
@@ -208,7 +226,17 @@ class CmeSpanImport(object):
                     row_dstBe_future.extracted_future_data_row = row_dst_8_F_e_future_data
 
                     #update future contract with settlement and date to mongo
-                    self.mongo_queries.fill_future_price(row_dst_8_F_e_future_data, row_dstBe_future)
+                    #self.mongo_queries.fill_future_price(row_dst_8_F_e_future_data, row_dstBe_future)
+
+                    info_dict = \
+                        {'idcontract': row_dstBe_future.idcontract,
+                         'settlement': row_dst_8_F_e_future_data.settlement_price,
+                         'openinterest': 0,
+                         'volume': 0,
+                         'date': row_dst_8_F_e_future_data.span_file_date_time}
+
+
+                    self.mongo_queries.save_futures_settlement(info_dict)
 
 
                 '''below imports the OPTION contract info'''
@@ -216,9 +244,9 @@ class CmeSpanImport(object):
 
                     row_dstBe_option_info.extract_commodity_product_code_identifiers()
 
-                    if row_dstBe_option_info.commodity_product in \
-                            row_dstBe_option_info.instrument['span_cqg_codes_dict']:
-                        print('!@#',row_dstBe_option_info.instrument['span_cqg_codes_dict'][row_dstBe_option_info.commodity_product])
+                    #if row_dstBe_option_info.commodity_product in \
+                    #        row_dstBe_option_info.instrument['span_cqg_codes_dict']:
+                    #    print('!@#',row_dstBe_option_info.instrument['span_cqg_codes_dict'][row_dstBe_option_info.commodity_product])
 
                     if row_dstBe_option_info.product_type == SPAN_FILE_PRODUCT_TYPE_CODES.oof and \
                         row_dstBe_option_info.commodity_product in \
@@ -297,7 +325,7 @@ class CmeSpanImport(object):
 
                             #row_dstBe_option_info.span_underlying_future_contract_props.extracted_future_data_row \
                             #    .settlement_price
-
+                            '''
                             print('$$$$$$$$$$',row_dstBe_option_info.product_type, row_dst_8_OOF_e_option_data.option_type, \
                                                                row_dstBe_option_info.span_underlying_future_contract_props.extracted_future_data_row \
                                                                 .settlement_price, \
@@ -306,6 +334,7 @@ class CmeSpanImport(object):
                                                                self.risk_free_rate, \
                                                                row_dst_8_OOF_e_option_data.settlement_price, \
                                                                optionTickSize)
+                                                               '''
 
                             #calculate implied vol
 
@@ -319,11 +348,41 @@ class CmeSpanImport(object):
                                                                row_dst_8_OOF_e_option_data.settlement_price, \
                                                                optionTickSize)
 
-                            print('^^^^^^^^^^^',row_dst_8_OOF_e_option_data.implied_vol)
+                            #print('^^^^^^^^^^^',row_dst_8_OOF_e_option_data.implied_vol)
 
-                            self.mongo_queries.fill_option_info_and_data(row_dst_8_OOF_e_option_data, \
-                                                                         row_dstBe_option_info)
+                            option_info_dict = \
+                            {
+                                "expirationdate": row_dstBe_option_info.option_contract_expiration,
+                                "idinstrument": row_dst_8_OOF_e_option_data.instrument['idinstrument'],
+                                "strikeprice": row_dst_8_OOF_e_option_data.option_strike_price,
+                                # "idoption" : 3,  # Not required
+                                "callorput": row_dst_8_OOF_e_option_data.option_type,
+                                "optionname": row_dst_8_OOF_e_option_data.option_cqg_symbol,
+                                "optionmonthint": row_dst_8_OOF_e_option_data.option_contract_month,
+                                "cqgsymbol": row_dst_8_OOF_e_option_data.option_cqg_symbol,
+                                "idcontract": row_dstBe_option_info.span_underlying_future_contract_props.idcontract,
+                                "optionmonth": row_dst_8_OOF_e_option_data.option_contract_month_char,
+                                "optionyear": row_dst_8_OOF_e_option_data.option_contract_year,
+                                "optioncode": row_dst_8_OOF_e_option_data.option_span_cqg_code['optcod']
+                            }
 
+                            id_option = self.mongo_queries.save_option_info(option_info_dict)
+
+                            #self.mongo_queries.fill_option_info_and_data(row_dst_8_OOF_e_option_data, \
+                            #                                             row_dstBe_option_info)
+
+                            option_data_dict = \
+                                {
+                                    "timetoexpinyears" : row_dstBe_option_info.option_time_to_exp,
+                                    "idoption" : id_option,
+                                    "price" : row_dst_8_OOF_e_option_data.settlement_price,
+                                    "datetime" : row_dst_8_OOF_e_option_data.span_file_date_time,
+                                    "impliedvol" : row_dst_8_OOF_e_option_data.implied_vol
+                                }
+
+                            id_option = self.mongo_queries.save_options_data(option_data_dict)
+
+                print('finished', instrument['symbol'])
 
 
 
