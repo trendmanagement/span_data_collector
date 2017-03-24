@@ -2,7 +2,7 @@ from span_reader.cme_span import CmeSpanImport
 from span_reader.ice_span import IceSpanImport
 
 input_args = {}
-
+'''
 
 input_args['risk_free_rate'] = 0.01
 
@@ -14,7 +14,6 @@ csi = CmeSpanImport(input_args)
 filepath = "C:\\Users\\Steve Pickering\\Desktop\\span_data_collector\\cme.20170106.c.pa2"
 
 csi.load_span_file(filepath)
-
 
 '''
 #input_args['idinstrument'] = 36
@@ -28,4 +27,3 @@ futures_filepath = "/home/ubertrader/Dropbox/tmqrexo/notebooks/development/ice_i
 options_filepath = "/home/ubertrader/Dropbox/tmqrexo/notebooks/development/ice_import/options/EOD_Options_578_2017.csv"
 
 csi.load_span_file(futures_filepath, options_filepath)
-'''

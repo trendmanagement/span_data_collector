@@ -50,10 +50,12 @@ class IceSpanImport(object):
             self.risk_free_rate = 0.01
 
         self.mongo_queries = MongoQueries()
-        self.datasource = DataSourceMongo(MONGO_CONNSTR, MONGO_EXO_DB)
+        self.datasource = DataSourceMongo(MONGO_CONNSTR_LOCAL, MONGO_EXO_DB_LOCAL)
 
         self.instrumentInfo = InstrumentInfo(idinstrument=self.idinstrument).instrument_list[0]
 
+        self.serial_months_map = {}
+        """Map unknown futures MarketIDs (for serial options) to next available future month MarketID"""
 
     def get_month_by_code(self, month_letter):
         """
@@ -232,8 +234,21 @@ class IceSpanImport(object):
                 fut_contract_data = futures_info.loc[odict['UnderlyingMarketID']]
                 fut_contract_id = fut_contract_data['idcontract']
             except KeyError:
-                warnings.warn("Can't find underlying option contract for OptionMarketID: {0}".format(odf_idx))
-                continue
+                try:
+                    fut_contract_data = futures_info[(futures_info.year >= odict.year) & (futures_info.monthint > odict.monthint)].iloc[0]
+                    fut_contract_id = fut_contract_data['idcontract']
+                    if odict['UnderlyingMarketID'] in self.serial_months_map:
+                        assert self.serial_months_map[odict['UnderlyingMarketID']] == fut_contract_data.name, 'Unexpected UnderlyingMarketID map'
+                    else:
+                        self.serial_months_map[odict['UnderlyingMarketID']] = fut_contract_data.name
+
+                    warnings.warn("Apply closest futures series for {2} Option: {0} to Future: {1}".format(odict['StripName'],
+                                                                                                   fut_contract_data[
+                                                                                                       'StripName'],
+                                                                                                   fut_contract_data["ProductName"]))
+                except:
+                    warnings.warn("Can't find closest future month for option: {0}".format(odict['contractname']))
+                    continue
 
             options_info.at[odf_idx, 'idcontract'] = fut_contract_id
 
@@ -316,9 +331,11 @@ class IceSpanImport(object):
             if pd.isnull(option_expiration) or pd.isnull(opt_current_date):
                 continue
 
-
             try:
-                fut_contract_data = futures_df[futures_df['MarketID'] == odict['UnderlyingMarketID']].ix[opt_current_date]
+                # Get serial options ID from serial_months_map otherwise use odict['UnderlyingMarketID']
+                ulmktid = self.serial_months_map.get(odict['UnderlyingMarketID'], odict['UnderlyingMarketID'])
+                fut_contract_data = futures_df[futures_df['MarketID'] == ulmktid].ix[
+                    opt_current_date]
                 underlying_px = fut_contract_data['SettlementPrice']
             except KeyError:
                 continue
@@ -345,7 +362,6 @@ class IceSpanImport(object):
             }
             self.mongo_queries.save_options_data(info_dict)
 
-
     def load_span_file(self, futures_filepath, options_filepath):
         """
             Reads and loads the span file into the mongodb
@@ -356,7 +372,7 @@ class IceSpanImport(object):
         if os.path.exists(self.futures_filepath) and os.path.exists(self.options_filepath):
 
             futures_df = pd.read_csv(self.futures_filepath, error_bad_lines=False, parse_dates=[0],
-                                          usecols=range(19), index_col=0)
+                                     usecols=range(19), index_col=0)
             options_df = pd.read_csv(self.options_filepath, error_bad_lines=False, parse_dates=[0], index_col=0)
 
             # Process futures and options meta-information
