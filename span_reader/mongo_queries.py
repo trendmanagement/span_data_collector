@@ -9,8 +9,8 @@ COUNTER_OPTIONS = 'idoption'
 
 class MongoQueries():
     def __init__(self, args=None):
-        self.mongoclient = MongoClient(MONGO_CONNSTR)
-        self.db = self.mongoclient[MONGO_EXO_DB]
+        self.mongoclient = MongoClient(MONGO_CONNSTR_LOCAL)
+        self.db = self.mongoclient[MONGO_EXO_DB_LOCAL]
 
         # Creating collection indexes for performance
         self.init_collection_indexes()
@@ -193,7 +193,7 @@ class MongoQueries():
             ir = oid_obj['optioninputclose']/100
             break
 
-        print(ir)
+        #print(ir)
 
         return ir
 

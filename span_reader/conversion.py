@@ -6,9 +6,11 @@ from math import floor
 class ConversionAndRounding:
     #def __init__(self):
 
-    def convertToStrikeForCQGSymbol(self, barVal = 0, tickIncrementIn = 0, tickDisplayIn = 0, idInstrument = 0):
+    def convertToStrikeForCQGSymbol(self, barVal, tickIncrementIn, tickDisplayIn, idInstrument):
 
-        if (idInstrument == 39 or idInstrument == 40): # GLE or HE
+        instrumentIdArrayCheck = [1, 360, 2, 3, 21, 23, 25, 31, 33, 34, 35, 39, 40, 42, 43]
+
+        '''if (idInstrument == 39 or idInstrument == 40): # GLE or HE
 
             return int(barVal * tickDisplayIn)
 
@@ -16,11 +18,16 @@ class ConversionAndRounding:
 
             return int(barVal * tickDisplayIn)
 
+        elif (idInstrument == 2 or idInstrument == 3 or idInstrument == 21 or idInstrument == 23 or idInstrument == 25 or idInstrument == 31):
+        '''
+        if idInstrument in instrumentIdArrayCheck:
+            return int(barVal * tickDisplayIn)
+
         else:
-            return int(ConversionAndRounding.convertToTickMovesDouble(barVal, tickIncrementIn, tickDisplayIn))
+            return int(ConversionAndRounding.convertToTickMovesDouble(self, barVal, tickIncrementIn, tickDisplayIn))
 
 
-    def convertToTickMovesDouble(self, barVal = 0, tickIncrementIn = 0, tickDisplayIn = 0):
+    def convertToTickMovesDouble(self, barVal, tickIncrementIn, tickDisplayIn):
         '''
         Converts double value to nearest tick
         :param barVal:
@@ -100,7 +107,7 @@ class ConversionAndRounding:
                     return tempval / tempStrikeDisplay
 
                 else:
-                    return ConversionAndRounding.convertToTickMovesDoubleSpan(barVal, strikeIncrement, 0)
+                    return ConversionAndRounding.convertToTickMovesDoubleSpan(self, barVal, strikeIncrement, 0)
 
             elif idInstrument == 532: #LB lumber
 
@@ -111,13 +118,13 @@ class ConversionAndRounding:
 
             else:
 
-                return ConversionAndRounding.convertToTickMovesDoubleSpan(barVal, strikeIncrement, strikeDisplay)
+                return ConversionAndRounding.convertToTickMovesDoubleSpan(self, barVal, strikeIncrement, strikeDisplay)
 
         except:
             print("conversion error")
             logging.exception("conversion  error")
 
-    def convertToTickMovesDoubleSpan(self, barVal = 0, tickIncrementIn = 0, tickDisplayIn = 0):
+    def convertToTickMovesDoubleSpan(self, barVal, tickIncrementIn, tickDisplayIn):
         '''
         Converts double value to nearest tick
         :param barVal:

@@ -10,8 +10,48 @@
     {
         "idinstrument": 2,
         "optionstrikeincrement": 0.25,
-        "optionstrikedisplay": 25,
+        "optionstrikedisplay": 100,
         "spanstrikedisplay": 2.5
+    },
+    {
+        "idinstrument": 3,
+        "optionstrikedisplay": 100
+    },
+    {
+        "idinstrument": 21,
+        "optionstrikedisplay": 100
+    },
+    {
+        "idinstrument": 23,
+        "optionstrikedisplay": 1000
+    },
+    {
+        "idinstrument": 25,
+        "optionstrikedisplay": 10000
+    },
+    {
+        "idinstrument": 31,
+        "optionstrikedisplay": 10
+    },
+    {
+        "idinstrument": 33,
+        "optionstrikedisplay": 10
+    },
+    {
+        "idinstrument": 34,
+        "optionstrikedisplay": 100
+    },
+    {
+        "idinstrument": 35,
+        "optionstrikedisplay": 10
+    },
+    {
+        "idinstrument": 42,
+        "optionstrikedisplay": 100
+    },
+    {
+        "idinstrument": 43,
+        "optionstrikedisplay": 1000
     },
 	{
       "idinstrument": 11,

@@ -89,13 +89,21 @@ class DataSpanType_8_Extract:
 
 
 
-            self.option_cqg_symbol = self.option_type + ".US." + self.instrument['cqgsymbol'] \
+            '''self.option_cqg_symbol = self.option_type + ".US." + self.instrument['cqgsymbol'] \
                                      + self.option_contract_month_char + str(self.option_contract_year % 100) \
                                      + str(ConversionAndRounding.convertToStrikeForCQGSymbol(self, \
                                                               self.option_strike_price, \
                                                               self.instrument['optionstrikeincrement'], \
                                                               self.instrument['spanstrikedisplay'], \
                                                               self.instrument['idinstrument']))
+'''
+            self.option_cqg_symbol = '{0}.US.{1}{2}{3}{4}'.format(self.option_type, self.instrument['cqgsymbol'],
+                                     self.option_contract_month_char, str(self.option_contract_year % 100),
+                                     str(ConversionAndRounding.convertToStrikeForCQGSymbol(self,
+                                                              self.option_strike_price,
+                                                              self.instrument['optionstrikeincrement'],
+                                                              self.instrument['optionstrikedisplay'],
+                                                              self.instrument['idinstrument'])))
 
         except:
             print("extract_rowtype_8 error")
