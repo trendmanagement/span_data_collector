@@ -29,16 +29,11 @@ class CmeSpanImport(object):
             self.optionenabled = 2
             self.risk_free_rate = 0.01
 
-        self.testing = True
-
+        self.testing = False
 
         self.mongo_queries = MongoQueries()
 
-
-
         self.instrumentInfo = InstrumentInfo(optionenabled=self.optionenabled)
-
-
 
 
     def load_span_file(self, filepath):
@@ -64,7 +59,7 @@ class CmeSpanImport(object):
 
             for instrument in self.instrumentInfo.instrument_list:
 
-                if instrument['idinstrument'] == 43:
+                if instrument['idinstrument'] > 0:
 
                     if self.testing:
                         self.test_df = []
@@ -453,10 +448,11 @@ class CmeSpanImport(object):
                     #x = pd.DataFrame(self.test_df)
                     #x.to_csv(instrument['symbol'] + "_data.csv")
 
-                    thefile = open(instrument['symbol'] + "_data.txt", 'w')
-                    for item in self.test_df:
-                        print(item)
-                        thefile.write("%s\n" % item)
+                    if self.testing:
+                        thefile = open(instrument['symbol'] + "_data.txt", 'w')
+                        for item in self.test_df:
+                            print(item)
+                            thefile.write("%s\n" % item)
 
 
                     print('finished', instrument['symbol'])

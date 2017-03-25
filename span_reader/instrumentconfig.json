@@ -18,6 +18,10 @@
         "optionstrikedisplay": 100
     },
     {
+        "idinstrument": 12,
+        "optionstrikedisplay": 1
+    },
+    {
         "idinstrument": 21,
         "optionstrikedisplay": 100
     },
@@ -31,6 +35,10 @@
     },
     {
         "idinstrument": 31,
+        "optionstrikedisplay": 10
+    },
+    {
+        "idinstrument": 32,
         "optionstrikedisplay": 10
     },
     {
@@ -53,8 +61,61 @@
         "idinstrument": 43,
         "optionstrikedisplay": 1000
     },
+    {
+        "idinstrument": 51,
+        "optionstrikedisplay": 10000
+    },
+    {
+        "idinstrument": 52,
+        "optionstrikedisplay": 10000
+    },
+    {
+        "idinstrument": 53,
+        "optionstrikedisplay": 1000000
+    },
+    {
+        "idinstrument": 54,
+        "optionstrikedisplay": 10000
+    },
+    {
+        "idinstrument": 99,
+        "optionstrikedisplay": 10000
+    },
+    {
+        "idinstrument": 101,
+        "optionstrikedisplay": 100
+    },
+    {
+        "idinstrument": 102,
+        "optionstrikedisplay": 10000
+    },
+    {
+        "idinstrument": 200,
+        "optionstrikedisplay": 1
+    },
+    {
+        "idinstrument": 210,
+        "optionstrikedisplay": 100
+    },
+    {
+        "idinstrument": 220,
+        "optionstrikedisplay": 100
+    },
+    {
+        "idinstrument": 360,
+        "optionstrikedisplay": 100
+    },
+    {
+        "idinstrument": 400,
+        "optionstrikedisplay": 10000
+    },
+    {
+        "idinstrument": 532,
+        "optionstrikedisplay": 100
+    },
 	{
       "idinstrument": 11,
+      "optionstrikedisplay": 10,
 	  "span_cqg_codes":[
 		{"cqg":"EP","span":"ES","optcod":" "},
 		{"cqg":"EW","span":"EW","optcod":"EW"},
