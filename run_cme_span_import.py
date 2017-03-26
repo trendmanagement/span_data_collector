@@ -37,4 +37,4 @@ if os.path.isdir(DEFAULT_SPAN_FOLDER):
 
     print(span_file)
 
-csi.load_span_file(span_file)
+    csi.load_span_file(span_file)
