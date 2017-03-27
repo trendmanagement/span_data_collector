@@ -8,11 +8,10 @@ from span_reader.cme_span import CmeSpanImport
 input_args = {}
 
 input_args['risk_free_rate'] = 0.01
-
 input_args['optionenabled'] = 2
+input_args['testing'] = False
 
 csi = CmeSpanImport(input_args)
-
 
 #Monday is 0 and Sunday is 6
 date = dt.datetime.now().date()
@@ -24,7 +23,6 @@ else:
     date += dt.timedelta(days=-1)
 
 print(date.strftime('%Y%m%d'))
-
 
 if os.path.isdir(DEFAULT_SPAN_FOLDER):
     span_file = "cme."

@@ -20,16 +20,20 @@ class CmeSpanImport(object):
 
     def __init__(self, args = None):
 
+
         if args != None:
             self.args = args
             self.optionenabled = args['optionenabled']
             self.risk_free_rate = args['risk_free_rate']
+            self.testing = args['testing']
+
 
         else:
             self.optionenabled = 2
             self.risk_free_rate = 0.01
+            self.testing = True
 
-        self.testing = False
+
 
         self.mongo_queries = MongoQueries()
 
