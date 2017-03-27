@@ -50,7 +50,7 @@ class IceSpanImport(object):
             self.risk_free_rate = 0.01
 
         self.mongo_queries = MongoQueries()
-        self.datasource = DataSourceMongo(MONGO_CONNSTR_LOCAL, MONGO_EXO_DB_LOCAL)
+        self.datasource = DataSourceMongo(MONGO_CONNSTR, MONGO_EXO_DB)
 
         self.instrumentInfo = InstrumentInfo(idinstrument=self.idinstrument).instrument_list[0]
 
