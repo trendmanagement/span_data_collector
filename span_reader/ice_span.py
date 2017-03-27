@@ -43,11 +43,9 @@ class IceSpanImport(object):
         if args != None:
             self.args = args
             self.idinstrument = args['optionenabled']
-            self.risk_free_rate = args['risk_free_rate']
 
         else:
             self.idinstrument = 36
-            self.risk_free_rate = 0.01
 
         self.mongo_queries = MongoQueries()
         self.datasource = DataSourceMongo(MONGO_CONNSTR, MONGO_EXO_DB)
@@ -340,12 +338,21 @@ class IceSpanImport(object):
             except KeyError:
                 continue
 
+            '''get the interest rate from the database after date is extracted from rowtype_0'''
+
+            try:
+                risk_free_rate = self.mongo_queries.get_risk_free_rate(opt_current_date)
+            except:
+                risk_free_rate = 0.01
+                warnings.warn("Can't find risk free rate for: {0}".format(opt_current_date))
+                continue
+
             opt_timetoexp_in_years = to_expiration_years(option_expiration, opt_current_date)
             iv = calculateOptionVolatilityNR(odict['OptionType'],
                                              underlying_px,
                                              odict['StrikePrice'],
                                              opt_timetoexp_in_years,
-                                             self.risk_free_rate,
+                                             risk_free_rate,
                                              opt_settle_px,
                                              optionTickSize
                                              )

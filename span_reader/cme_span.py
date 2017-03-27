@@ -11,6 +11,7 @@ from span_reader.instrument_info import InstrumentInfo
 from span_reader.span_objects import *
 from span_reader.option_calcs import calculateOptionVolatilityNR
 from span_reader.mongo_queries import MongoQueries
+import warnings
 
 
 class CmeSpanImport(object):
@@ -24,13 +25,10 @@ class CmeSpanImport(object):
         if args != None:
             self.args = args
             self.optionenabled = args['optionenabled']
-            self.risk_free_rate = args['risk_free_rate']
             self.testing = args['testing']
-
 
         else:
             self.optionenabled = 2
-            self.risk_free_rate = 0.01
             self.testing = True
 
 
@@ -52,6 +50,8 @@ class CmeSpanImport(object):
         #print(self.filepath)
 
         if os.path.exists(self.filepath):
+
+            self.filled_risk_free_rate = False
 
             file_object = open(self.filepath, 'r')
 
@@ -96,7 +96,15 @@ class CmeSpanImport(object):
                                 self.extract_rowtype_0(line_in = line, instrument_symbol = instrument)
 
                             '''get the interest rate from the database after date is extracted from rowtype_0'''
-                            self.interest_rate = self.mongo_queries.get_risk_free_rate(self.span_file_date_time)
+
+                            if not self.filled_risk_free_rate:
+                                try:
+                                    self.risk_free_rate = self.mongo_queries.get_risk_free_rate(self.span_file_date_time)
+                                    self.filled_risk_free_rate = True
+                                except:
+                                    self.risk_free_rate = 0.01
+                                    warnings.warn("Can't find risk free rate for: {0}".format(self.span_file_date_time))
+                                    continue
 
                             '''update the instrument info specific to the current date'''
                             self.instrumentInfo.update_instrument_list(instrument,self.span_file_date_time)
