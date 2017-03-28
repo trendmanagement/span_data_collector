@@ -184,7 +184,7 @@ def gVega(ulprice, strike, toexpiry, riskfreerate, b, iv):
 
         d1 = (math.log(ulprice / strike) + (b + math.pow(iv, 2) / 2) * toexpiry) / (iv * math.sqrt(toexpiry))
 
-        return ulprice * math.exp((b - riskfreerate) * toexpiry) * nd * math.sqrt(toexpiry)
+        return ulprice * math.exp((b - riskfreerate) * toexpiry) * nd(d1) * math.sqrt(toexpiry)
 
     except:
         return 0
