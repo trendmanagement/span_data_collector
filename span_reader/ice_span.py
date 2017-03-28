@@ -146,7 +146,8 @@ class IceSpanImport(object):
                                                                                               self.instrumentInfo[
                                                                                                   'spanstrikedisplay'],
                                                                                               self.instrumentInfo[
-                                                                                                  'idinstrument']),
+                                                                                                  'idinstrument'],
+                                                                                              False),
                                             )
 
     def get_expiration_date(self, df_row, contr_type):
