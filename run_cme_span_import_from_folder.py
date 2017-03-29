@@ -15,8 +15,18 @@ csi = CmeSpanImport(input_args)
 
 if os.path.isdir(DEFAULT_SPAN_FOLDER_MULTIPLE_FILES):
 
+    thefile = open("progress_data.txt", 'w')
+    thefile.close()
+
+
+
     for file in os.listdir(DEFAULT_SPAN_FOLDER_MULTIPLE_FILES):
         if file.endswith(".pa2"):
             print(os.path.join(DEFAULT_SPAN_FOLDER_MULTIPLE_FILES, file))
             span_file = os.path.join(DEFAULT_SPAN_FOLDER_MULTIPLE_FILES, file)
+
             csi.load_span_file(span_file)
+
+            thefile = open("progress_data.txt", 'a')
+            thefile.write("%s\n" % file)
+            thefile.close()

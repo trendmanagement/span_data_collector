@@ -55,7 +55,29 @@ class CmeSpanImport(object):
 
             file_object = open(self.filepath, 'r')
 
-            file_lines = file_object.readlines()
+            try:
+                file_lines = file_object.readlines()
+            except:
+                file_lines = []
+
+                while True:
+                    try:
+                        line = file_object.readline()
+
+                        while line:
+                            try:
+                                file_lines.append(line)
+                                line = file_object.readline()
+                            except:
+                                warnings.warn("Can't Import File Line")
+                                continue
+
+                        break
+                    except:
+                        continue
+
+
+            print(file_lines)
 
             #print('test ', self.filepath)
 
