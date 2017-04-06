@@ -108,11 +108,11 @@ def calculateOptionVolatilityNRCalc(callPutFlag, ulprice, strike, toexpiry, risk
                 smallestPriceDifference = priceDifference
 
 
-            vi = math.abs(vi - (ci - currentOptionPrice) / vegai)
+            vi = abs(vi - (ci - currentOptionPrice) / vegai)
 
             ci = blackScholes(callPutFlag, ulprice, strike, toexpiry, riskfreerate, vi)
 
-            priceDifference = math.abs(currentOptionPrice - ci)
+            priceDifference = abs(currentOptionPrice - ci)
 
             if (vi <= 0 or math.isinf(vi) or math.isnan(vi)):
                 vi = prevVi

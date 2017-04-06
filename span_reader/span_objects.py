@@ -305,11 +305,11 @@ class DataSpanType_B_Extract:
 
             self.option_contract_month_date = datetime.strptime(self.option_contract_month_str, "%Y%m")
 
-            self.option_contract_month = self.future_contract_month_date.month
+            self.option_contract_month = self.option_contract_month_date.month
 
-            self.option_contract_month_char = SPAN_CONSTANTS.option_months[self.future_contract_month - 1]
+            self.option_contract_month_char = SPAN_CONSTANTS.option_months[self.option_contract_month - 1]
 
-            self.option_contract_year = self.future_contract_month_date.year
+            self.option_contract_year = self.option_contract_month_date.year
 
             #self.option_contract_expiration = datetime.strptime(self.expiration_str, "%Y%m%d")
 
