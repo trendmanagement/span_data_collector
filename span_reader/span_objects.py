@@ -332,8 +332,8 @@ class DataSpanType_B_Extract:
                     CME_SPAN_TYPE_B.expiration_end].strip()
 
             self.option_time_to_exp_str = self.line[ \
-                CME_SPAN_TYPE_B.expiration_start: \
-                    CME_SPAN_TYPE_B.expiration_end].strip()
+                CME_SPAN_TYPE_B.time_to_expiration_start: \
+                    CME_SPAN_TYPE_B.time_to_expiration_end].strip()
 
             self.option_contract_expiration = datetime.strptime(self.option_expiration_str, "%Y%m%d")
 
