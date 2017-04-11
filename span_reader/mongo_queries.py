@@ -28,6 +28,7 @@ class MongoQueries():
                                          ('optionmonthint', pymongo.ASCENDING),
                                          ('strikeprice', pymongo.ASCENDING),
                                          ('callorput', pymongo.ASCENDING),
+                                         ('optioncode', pymongo.ASCENDING)
                                          ])
         self.db['futures_contract_settlements'].create_index([('idcontract', pymongo.ASCENDING),
                                                               ('date', pymongo.ASCENDING)])

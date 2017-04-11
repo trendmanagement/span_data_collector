@@ -85,7 +85,7 @@ class CmeSpanImport(object):
 
             for instrument in self.instrumentInfo.instrument_list:
 
-                if instrument['idinstrument'] >= 0:
+                if instrument['idinstrument'] == 52:
 
                     if self.testing:
                         self.test_df = []
