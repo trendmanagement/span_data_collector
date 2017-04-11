@@ -77,7 +77,7 @@ class CmeSpanImport(object):
                         continue
 
 
-            print(file_lines)
+            #print(file_lines)
 
             #print('test ', self.filepath)
 
@@ -85,7 +85,7 @@ class CmeSpanImport(object):
 
             for instrument in self.instrumentInfo.instrument_list:
 
-                if instrument['idinstrument'] > 0:
+                if instrument['idinstrument'] == 52:
 
                     if self.testing:
                         self.test_df = []
@@ -164,7 +164,10 @@ class CmeSpanImport(object):
                                 #print("@@@" + dst8e.row_exchg)
 
                                 if dst8e.row_exchg == instrument['exchange']['spanexchangesymbol'] and \
-                                        (dst8e.commodity_product_code == instrument['spanfuturecode'] or dst8e.commodity_product_code == instrument['spanoptioncode']):
+                                        (dst8e.commodity_product_code == instrument['spanfuturecode'] or
+                                            dst8e.commodity_product_code in \
+                                                instrument['span_cqg_codes_dict']):
+                                                 #dst8e.commodity_product_code == instrument['spanoptioncode']):
 
                                     if dst8e.product_type == SPAN_FILE_PRODUCT_TYPE_CODES.fut:
                                         rowListType8_F.append(dst8e)
@@ -394,14 +397,14 @@ class CmeSpanImport(object):
                                 #calculate implied vol
 
                                 row_dst_8_OOF_e_option_data.implied_vol = \
-                                    calculateOptionVolatilityNR(row_dst_8_OOF_e_option_data.option_type, \
+                                    round(calculateOptionVolatilityNR(row_dst_8_OOF_e_option_data.option_type, \
                                                                    row_dstBe_option_info.span_underlying_future_contract_props.extracted_future_data_row \
                                                                     .settlement_price, \
                                                                    row_dst_8_OOF_e_option_data.option_strike_price, \
                                                                    row_dstBe_option_info.option_time_to_exp, \
                                                                    self.risk_free_rate, \
                                                                    row_dst_8_OOF_e_option_data.settlement_price, \
-                                                                   optionTickSize)
+                                                                   optionTickSize),5)
 
                                 #print('^^^^^^^^^^^',row_dst_8_OOF_e_option_data.implied_vol)
 

@@ -138,9 +138,9 @@ class MongoQueries():
         :return:
         """
 
-        if ('optcod' in info_dict and info_dict['optcod'].strip() != ''):
+        if ('optioncode' in info_dict and info_dict['optioncode'].strip() != ''):
             return self._save_mongo_dict('options',
-                                         ['optionmonthint', 'optionyear', 'strikeprice', 'idinstrument', 'callorput','optcod'],
+                                         ['optionmonthint', 'optionyear', 'strikeprice', 'idinstrument', 'callorput','optioncode'],
                                          info_dict, COUNTER_OPTIONS)
         else:
             return self._save_mongo_dict('options',

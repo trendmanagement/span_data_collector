@@ -39,6 +39,7 @@ class InstrumentInfo(object):
 
         cfg_file = Path(INSTRUMENT_CONFIG_JSON_FILE)
 
+
         '''check if cfg_file is a file before attempting to import'''
         if cfg_file.is_file():
 

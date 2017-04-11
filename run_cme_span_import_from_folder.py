@@ -8,7 +8,7 @@ from span_reader.cme_span import CmeSpanImport
 input_args = {}
 
 input_args['optionenabled'] = 2
-input_args['testing'] = False
+input_args['testing'] = True
 
 csi = CmeSpanImport(input_args)
 

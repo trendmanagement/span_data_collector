@@ -97,7 +97,8 @@ class DataSpanType_8_Extract:
                                                               self.instrument['spanstrikedisplay'], \
                                                               self.instrument['idinstrument']))
 '''
-            self.option_cqg_symbol = '{0}.US.{1}{2}{3}{4}'.format(self.option_type, self.instrument['cqgsymbol'],
+
+            self.option_cqg_symbol = '{0}.US.{1}{2}{3}{4}'.format(self.option_type, self.option_span_cqg_code['cqg'], #self.instrument['cqgsymbol'],
                                      self.option_contract_month_char, str(self.option_contract_year % 100),
                                      str(ConversionAndRounding.convertToStrikeForCQGSymbol(self,
                                                               self.option_strike_price,

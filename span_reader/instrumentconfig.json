@@ -66,10 +66,6 @@
         "optionstrikedisplay": 10000
     },
     {
-        "idinstrument": 52,
-        "optionstrikedisplay": 10000
-    },
-    {
         "idinstrument": 53,
         "optionstrikedisplay": 1000000
     },
@@ -128,6 +124,19 @@
 		{"cqg":"EP33","span":"E3C","optcod":"E3C"},
 		{"cqg":"EP34","span":"E4C","optcod":"E4C"},
 		{"cqg":"EP35","span":"E5C","optcod":"E5C"}
+		]
+    },
+    {
+      "idinstrument": 52,
+      "optionstrikedisplay": 10000,
+	  "span_cqg_codes":[
+		{"cqg":"EU6","span":"EC","optcod":" "},
+		{"cqg":"EUE","span":"EUU","optcod":"EUU"},
+		{"cqg":"EUE1","span":"1EU","optcod":"1EU"},
+		{"cqg":"EUE2","span":"2EU","optcod":"2EU"},
+		{"cqg":"EUE3","span":"3EU","optcod":"3EU"},
+		{"cqg":"EUE4","span":"4EU","optcod":"4EU"},
+		{"cqg":"EUE5","span":"5EU","optcod":"5EU"}
 		]
     }
   ]
