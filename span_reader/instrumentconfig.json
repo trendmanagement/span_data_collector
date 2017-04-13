@@ -66,14 +66,6 @@
         "optionstrikedisplay": 10000
     },
     {
-        "idinstrument": 53,
-        "optionstrikedisplay": 1000000
-    },
-    {
-        "idinstrument": 54,
-        "optionstrikedisplay": 10000
-    },
-    {
         "idinstrument": 99,
         "optionstrikedisplay": 10000
     },
@@ -137,6 +129,32 @@
 		{"cqg":"EUE3","span":"3EU","optcod":"3EU"},
 		{"cqg":"EUE4","span":"4EU","optcod":"4EU"},
 		{"cqg":"EUE5","span":"5EU","optcod":"5EU"}
+		]
+    },
+    {
+      "idinstrument": 53,
+      "optionstrikedisplay": 1000000,
+	  "span_cqg_codes":[
+		{"cqg":"JY6","span":"J1","optcod":" "},
+		{"cqg":"JYE","span":"JPU","optcod":"JPU"},
+		{"cqg":"JY1","span":"1JY","optcod":"1JY"},
+		{"cqg":"JY2","span":"2JY","optcod":"2JY"},
+		{"cqg":"JY3","span":"3JY","optcod":"3JY"},
+		{"cqg":"JY4","span":"4JY","optcod":"4JY"},
+		{"cqg":"JY5","span":"5JY","optcod":"5JY"}
+		]
+    },
+    {
+      "idinstrument": 54,
+      "optionstrikedisplay": 10000,
+	  "span_cqg_codes":[
+		{"cqg":"BP6","span":"BP","optcod":" "},
+		{"cqg":"BPE","span":"GBU","optcod":"GBU"},
+		{"cqg":"BP1","span":"1BP","optcod":"1BP"},
+		{"cqg":"BP2","span":"2BP","optcod":"2BP"},
+		{"cqg":"BP3","span":"3BP","optcod":"3BP"},
+		{"cqg":"BP4","span":"4BP","optcod":"4BP"},
+		{"cqg":"BP5","span":"5BP","optcod":"5BP"}
 		]
     }
   ]

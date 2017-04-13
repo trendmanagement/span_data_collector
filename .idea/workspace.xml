@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/span_reader/cme_span.py" line="471" />
-    <bookmark url="file://$PROJECT_DIR$/span_reader/cme_span.py" line="185" />
-    <bookmark url="file://$PROJECT_DIR$/span_reader/cme_span.py" line="346" />
-    <bookmark url="file://$PROJECT_DIR$/span_reader/mongo_queries.py" line="225" />
+    <bookmark url="file://$PROJECT_DIR$/span_reader/cme_span.py" line="496" />
+    <bookmark url="file://$PROJECT_DIR$/span_reader/cme_span.py" line="210" />
+    <bookmark url="file://$PROJECT_DIR$/span_reader/cme_span.py" line="371" />
+    <bookmark url="file://$PROJECT_DIR$/span_reader/mongo_queries.py" line="226" />
+    <bookmark url="file://$PROJECT_DIR$/span_reader/span_objects.py" line="335" />
+    <bookmark url="file://$PROJECT_DIR$/span_reader/cme_span.py" line="314" />
+    <bookmark url="file://$PROJECT_DIR$/span_reader/cme_span.py" line="169" />
+    <bookmark url="file://$PROJECT_DIR$/span_reader/cme_span.py" line="310" />
+    <bookmark url="file://$PROJECT_DIR$/span_reader/span_objects.py" line="100" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9c3d3c3-30d3-4333-ab74-a103b375329d" name="Default" comment="">
+    <list default="true" id="b9c3d3c3-30d3-4333-ab74-a103b375329d" name="Default" comment="fixed iv calc">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/span_reader/ice_span.py" afterPath="$PROJECT_DIR$/span_reader/ice_span.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/span_reader/run_span_import.py" afterPath="$PROJECT_DIR$/span_reader/run_span_import.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/span_reader/instrumentconfig.json" afterPath="$PROJECT_DIR$/span_reader/instrumentconfig.json" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,9 +27,9 @@
     <SUITE FILE_PATH="coverage/span_data_collector$mongo_queries.coverage" NAME="mongo_queries Coverage Results" MODIFIED="1489141010323" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/span_reader" />
     <SUITE FILE_PATH="coverage/span_data_collector$cme_span.coverage" NAME="cme_span Coverage Results" MODIFIED="1484159459784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/span_reader" />
     <SUITE FILE_PATH="coverage/span_data_collector$run_cme_span_import.coverage" NAME="run_cme_span_import Coverage Results" MODIFIED="1490221917402" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/span_reader" />
-    <SUITE FILE_PATH="coverage/span_data_collector$run_span_import.coverage" NAME="run_span_import Coverage Results" MODIFIED="1490653310539" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/span_reader" />
+    <SUITE FILE_PATH="coverage/span_data_collector$run_span_import.coverage" NAME="run_span_import Coverage Results" MODIFIED="1490719248838" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/span_reader" />
     <SUITE FILE_PATH="coverage/span_data_collector$ice_span.coverage" NAME="ice_span Coverage Results" MODIFIED="1489143162375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/span_reader" />
-    <SUITE FILE_PATH="coverage/span_data_collector$run_cme_span_import_from_folder.coverage" NAME="run_cme_span_import_from_folder Coverage Results" MODIFIED="1490574447540" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/span_data_collector$run_cme_span_import_from_folder.coverage" NAME="run_cme_span_import_from_folder Coverage Results" MODIFIED="1491937401342" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -33,21 +37,23 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ice_span.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/span_reader/ice_span.py">
+      <file leaf-file-name="instrument_info.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/span_reader/instrument_info.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="35">
-              <caret line="139" column="13" lean-forward="false" selection-start-line="139" selection-start-column="13" selection-end-line="139" selection-end-column="13" />
-              <folding />
+            <state relative-caret-position="-616">
+              <caret line="55" column="47" lean-forward="false" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="47" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="run_span_import.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/span_reader/run_span_import.py">
+      <file leaf-file-name="instrumentconfig.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/span_reader/instrumentconfig.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="57" lean-forward="false" selection-start-line="24" selection-start-column="57" selection-end-line="24" selection-end-column="57" />
+            <state relative-caret-position="247">
+              <caret line="156" column="49" lean-forward="true" selection-start-line="156" selection-start-column="49" selection-end-line="156" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -64,19 +70,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>get_instrument_list</find>
-      <find>find_one_and_update</find>
-      <find>$inc</find>
-      <find>instrument_info</find>
-      <find>self.futures_df</find>
-      <find>self.futures_info</find>
-      <find>self.options_info</find>
-      <find>idoption</find>
-      <find>contract_objectid</find>
-      <find>objectid</find>
-      <find>print(</find>
-      <find>print</find>
-      <find>logging</find>
       <find>Can't fine</find>
       <find>can't find</find>
       <find>VisibleDeprecationWarning</find>
@@ -94,6 +87,19 @@
       <find>input_args['testing']</find>
       <find>risk_free_rate</find>
       <find>risk</find>
+      <find>warning</find>
+      <find>file_lines</find>
+      <find>timeto</find>
+      <find>data_row_type</find>
+      <find>rowListTypeB</find>
+      <find>rowListTypeB_Option_dict</find>
+      <find>math.abs</find>
+      <find>spanoptioncode</find>
+      <find>span_cqg_codes_dict</find>
+      <find>instrument['span_cqg_codes_dict']</find>
+      <find>option_span_cqg_code</find>
+      <find>optcod</find>
+      <find>optioncode</find>
     </findStrings>
     <replaceStrings>
       <replace>'</replace>
@@ -110,6 +116,8 @@
       <replace>options_df</replace>
       <replace>futures_info</replace>
       <replace>options_info</replace>
+      <replace>JY</replace>
+      <replace>BP</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -135,23 +143,23 @@
         <option value="$PROJECT_DIR$/span_reader/temp" />
         <option value="$PROJECT_DIR$/span_reader/layout info structure" />
         <option value="$PROJECT_DIR$/span_reader/datasource_mongo.py" />
-        <option value="$PROJECT_DIR$/span_reader/instrument_info.py" />
-        <option value="$PROJECT_DIR$/span_reader/option_calcs.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/span_reader/run_cme_span_import.py" />
         <option value="$PROJECT_DIR$/cmd_run_cme_span_import.cmd" />
         <option value="$PROJECT_DIR$/ice_file_parser.ipynb" />
         <option value="$PROJECT_DIR$/RunCMESpan.ipynb" />
-        <option value="$PROJECT_DIR$/span_reader/instrumentconfig.json" />
         <option value="$PROJECT_DIR$/span_reader/conversion.py" />
-        <option value="$PROJECT_DIR$/span_reader/span_objects.py" />
-        <option value="$PROJECT_DIR$/span_reader/mongo_queries.py" />
         <option value="$PROJECT_DIR$/run_cme_span_import.py" />
-        <option value="$PROJECT_DIR$/run_cme_span_import_from_folder.py" />
-        <option value="$PROJECT_DIR$/span_reader/cme_span.py" />
         <option value="$PROJECT_DIR$/span_reader/ice_span.py" />
-        <option value="$PROJECT_DIR$/span_reader/settings.py" />
         <option value="$PROJECT_DIR$/span_reader/run_span_import.py" />
+        <option value="$PROJECT_DIR$/span_reader/option_calcs.py" />
+        <option value="$PROJECT_DIR$/span_reader/span_objects.py" />
+        <option value="$PROJECT_DIR$/span_reader/cme_span.py" />
+        <option value="$PROJECT_DIR$/run_cme_span_import_from_folder.py" />
+        <option value="$PROJECT_DIR$/span_reader/mongo_queries.py" />
+        <option value="$PROJECT_DIR$/span_reader/settings.py" />
+        <option value="$PROJECT_DIR$/span_reader/instrument_info.py" />
+        <option value="$PROJECT_DIR$/span_reader/instrumentconfig.json" />
       </list>
     </option>
   </component>
@@ -162,10 +170,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-18" />
-    <option name="y" value="19" />
-    <option name="width" value="1282" />
-    <option name="height" value="875" />
+    <option name="x" value="7" />
+    <option name="y" value="5" />
+    <option name="width" value="1296" />
+    <option name="height" value="1000" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -183,8 +191,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -227,6 +233,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -249,7 +257,7 @@
       <recent name="C:\Users\Steve Pickering\Desktop\span_data_collector\span_reader" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.run_span_import">
+  <component name="RunManager" selected="Python.run_cme_span_import_from_folder">
     <configuration default="false" name="run_span_import" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -563,8 +571,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.run_span_import" />
-        <item index="1" class="java.lang.String" itemvalue="Python.run_cme_span_import_from_folder" />
+        <item index="0" class="java.lang.String" itemvalue="Python.run_cme_span_import_from_folder" />
+        <item index="1" class="java.lang.String" itemvalue="Python.run_span_import" />
         <item index="2" class="java.lang.String" itemvalue="Python.run_cme_span_import" />
         <item index="3" class="java.lang.String" itemvalue="Python.ice_span" />
         <item index="4" class="java.lang.String" itemvalue="Python.mongo_queries" />
@@ -631,31 +639,88 @@
       <option name="project" value="LOCAL" />
       <updated>1490634888192</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fixed cqg symbol call in ICE import">
+      <created>1490717177748</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1490717177748</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fixed gVega calc&#10;nd(d1)">
+      <created>1490719536488</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1490719536488</updated>
+    </task>
+    <task id="LOCAL-00010" summary="added error catch for file object readlines">
+      <created>1490819611717</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1490819611717</updated>
+    </task>
+    <task id="LOCAL-00011" summary="added error catch for file object readlines">
+      <created>1491500802372</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1491500802372</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fixed iv calc">
+      <created>1491508871340</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1491508871340</updated>
+    </task>
+    <task id="LOCAL-00013" summary="updated for 6E etc">
+      <created>1491875131308</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1491875131308</updated>
+    </task>
+    <task id="LOCAL-00014" summary="idinstrument filter changed to &gt;= 0">
+      <created>1491875794865</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1491875794865</updated>
+    </task>
+    <task id="LOCAL-00015" summary="adjusted option collection index to include optioncode">
+      <created>1491938203078</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1491938203078</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-18" y="19" width="1282" height="875" extended-state="0" />
+    <frame x="7" y="5" width="1296" height="1000" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21685761" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22087379" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39944133" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.372176" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32681563" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32780612" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32122904" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42039105" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29488704" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42211652" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -689,84 +754,86 @@
     <MESSAGE value="Fixed instrument strike conversion" />
     <MESSAGE value="MONGO_CONNSTR updated" />
     <MESSAGE value="fixed risk free rate db call" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed risk free rate db call" />
+    <MESSAGE value="fixed cqg symbol call in ICE import" />
+    <MESSAGE value="fixed gVega calc&#10;nd(d1)" />
+    <MESSAGE value="added error catch for file object readlines" />
+    <MESSAGE value="fixed iv calc" />
+    <MESSAGE value="updated for 6E etc" />
+    <MESSAGE value="idinstrument filter changed to &gt;= 0" />
+    <MESSAGE value="adjusted option collection index to include optioncode" />
+    <option name="LAST_COMMIT_MESSAGE" value="adjusted option collection index to include optioncode" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/span_reader/cme_span.py</url>
-          <line>129</line>
+          <line>151</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/span_reader/mongo_queries.py</url>
-          <line>313</line>
+          <line>314</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/span_reader/mongo_queries.py</url>
-          <line>316</line>
+          <line>317</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/span_reader/mongo_queries.py</url>
-          <line>348</line>
+          <line>349</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/span_reader/mongo_queries.py</url>
-          <line>321</line>
+          <line>322</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/span_reader/mongo_queries.py</url>
-          <line>298</line>
+          <line>299</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/span_reader/span_objects.py</url>
-          <line>108</line>
+          <line>109</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/span_reader/mongo_queries.py</url>
-          <line>279</line>
+          <line>280</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/span_reader/mongo_queries.py</url>
-          <line>325</line>
+          <line>326</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/span_reader/cme_span.py</url>
-          <line>261</line>
+          <line>286</line>
           <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/span_reader/cme_span.py</url>
-          <line>253</line>
+          <line>278</line>
           <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/span_reader/cme_span.py</url>
-          <line>109</line>
-          <option name="timeStamp" value="49" />
-        </line-breakpoint>
-        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/span_reader/mongo_queries.py</url>
-          <line>197</line>
+          <line>198</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/span_reader/mongo_queries.py</url>
-          <line>191</line>
+          <line>192</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/span_reader/mongo_queries.py</url>
-          <line>192</line>
+          <line>193</line>
           <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
@@ -816,54 +883,59 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/span_reader/cme_span.py</url>
-          <line>436</line>
+          <line>461</line>
           <option name="timeStamp" value="79" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/span_reader/cme_span.py</url>
-          <line>385</line>
+          <line>410</line>
           <option name="timeStamp" value="80" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/run_cme_span_import_from_folder.py</url>
-          <line>15</line>
-          <option name="timeStamp" value="96" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/span_reader/cme_span.py</url>
-          <line>105</line>
-          <option name="timeStamp" value="97" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/span_reader/cme_span.py</url>
-          <line>101</line>
-          <option name="timeStamp" value="99" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/span_reader/cme_span.py</url>
-          <line>99</line>
-          <option name="timeStamp" value="100" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/span_reader/option_calcs.py</url>
-          <line>181</line>
-          <option name="timeStamp" value="101" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/span_reader/mongo_queries.py</url>
-          <line>161</line>
-          <option name="timeStamp" value="106" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/span_reader/mongo_queries.py</url>
-          <line>179</line>
+          <line>180</line>
           <option name="timeStamp" value="107" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/run_cme_span_import_from_folder.py</url>
+          <line>22</line>
+          <option name="timeStamp" value="117" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/span_reader/cme_span.py</url>
+          <line>89</line>
+          <option name="timeStamp" value="137" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/span_reader/instrument_info.py</url>
+          <line>43</line>
+          <option name="timeStamp" value="142" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/span_reader/cme_span.py</url>
+          <line>437</line>
+          <option name="timeStamp" value="147" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/span_reader/mongo_queries.py</url>
+          <line>142</line>
+          <option name="timeStamp" value="154" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/span_reader/mongo_queries.py</url>
+          <line>146</line>
+          <option name="timeStamp" value="155" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/span_reader/instrument_info.py</url>
+          <line>41</line>
+          <option name="timeStamp" value="157" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="108" />
+      <option name="time" value="158" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -879,20 +951,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/span_reader/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="27" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/span_reader/instrument_info.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="11" lean-forward="false" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/span_reader/span_objects.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -913,8 +971,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#74#88#0" expanded="true" />
-            <element signature="e#23286#23342#0" expanded="false" />
+            <element signature="e#74#88#0" expanded="false" />
+            <element signature="e#24152#24208#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -930,7 +988,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -976,13 +1033,6 @@
     <entry file="file://$PROJECT_DIR$/span_reader/cmecore_xmlgeneration.py" />
     <entry file="file://$PROJECT_DIR$/span_reader/cmemargincalls.py" />
     <entry file="file://$PROJECT_DIR$/span_reader/app.ini" />
-    <entry file="file://$PROJECT_DIR$/span_reader/span_input_constants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-558">
-          <caret line="18" column="17" lean-forward="false" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python3.5/dist-packages/pandas/indexes/base.py" />
     <entry file="file:///usr/local/lib/python3.5/dist-packages/pandas/core/indexing.py" />
     <entry file="file:///usr/local/lib/python3.5/dist-packages/pymongo/network.py" />
@@ -1019,7 +1069,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1027,14 +1076,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
           <caret line="1588" column="15" lean-forward="true" selection-start-line="1588" selection-start-column="15" selection-end-line="1588" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Anaconda3/Lib/codecs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="323" column="0" lean-forward="false" selection-start-line="323" selection-start-column="0" selection-end-line="323" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1042,13 +1083,6 @@
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
           <selected id="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/span_reader/instrumentconfig.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="40" column="26" lean-forward="false" selection-start-line="40" selection-start-column="26" selection-end-line="40" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -1073,22 +1107,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/span_reader/span_objects.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1717">
-          <caret line="105" column="109" lean-forward="false" selection-start-line="105" selection-start-column="109" selection-end-line="105" selection-end-column="109" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/span_reader/instrument_info.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="28" column="71" lean-forward="false" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RunCMESpan.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -1103,16 +1121,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run_cme_span_import.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/span_reader/datasource_mongo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -1121,81 +1129,139 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run_cme_span_import_from_folder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Anaconda3/Lib/site-packages/pandas/core/frame.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
           <caret line="4156" column="0" lean-forward="false" selection-start-line="4156" selection-start-column="0" selection-end-line="4156" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Anaconda3/Lib/encodings/cp1252.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Anaconda3/Lib/fileinput.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="94" column="0" lean-forward="false" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Anaconda3/Lib/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="308" column="0" lean-forward="false" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/span_reader/run_span_import.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_cme_span_import.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-136">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/span_reader/span_input_constants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="72" column="26" lean-forward="false" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/span_reader/conversion.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="11">
+          <caret line="8" column="20" lean-forward="false" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/span_reader/option_calcs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="188" column="0" lean-forward="false" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
+        <state relative-caret-position="182">
+          <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/span_reader/ice_span.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5950">
+          <caret line="351" column="17" lean-forward="false" selection-start-line="351" selection-start-column="17" selection-end-line="351" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/span_reader/mongo_queries.py">
+    <entry file="file://$PROJECT_DIR$/span_reader/span_objects.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1649">
+          <caret line="101" column="0" lean-forward="false" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/span_reader/cme_span.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1112">
-          <caret line="109" column="0" lean-forward="false" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
+        <state relative-caret-position="7395">
+          <caret line="435" column="75" lean-forward="false" selection-start-line="435" selection-start-column="75" selection-end-line="435" selection-end-column="75" />
           <folding>
-            <element signature="e#74#88#0" expanded="true" />
-            <element signature="e#23286#23342#0" expanded="false" />
+            <element signature="e#74#88#0" expanded="false" />
+            <element signature="e#24152#24208#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/span_reader/mongo_queries.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="74" lean-forward="false" selection-start-line="30" selection-start-column="74" selection-end-line="30" selection-end-column="74" />
+          <folding>
+            <element signature="e#0#34#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_cme_span_import_from_folder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#9#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/span_reader/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="34" lean-forward="false" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+        <state relative-caret-position="221">
+          <caret line="13" column="12" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/span_reader/ice_span.py">
+    <entry file="file://$PROJECT_DIR$/span_reader/instrument_info.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="35">
-          <caret line="139" column="13" lean-forward="false" selection-start-line="139" selection-start-column="13" selection-end-line="139" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="-616">
+          <caret line="55" column="47" lean-forward="false" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/span_reader/run_span_import.py">
+    <entry file="file://$PROJECT_DIR$/span_reader/instrumentconfig.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="57" lean-forward="false" selection-start-line="24" selection-start-column="57" selection-end-line="24" selection-end-column="57" />
+        <state relative-caret-position="247">
+          <caret line="156" column="49" lean-forward="true" selection-start-line="156" selection-start-column="49" selection-end-line="156" selection-end-column="49" />
           <folding />
         </state>
       </provider>
