@@ -12,9 +12,9 @@
     <bookmark url="file://$PROJECT_DIR$/span_reader/span_objects.py" line="100" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9c3d3c3-30d3-4333-ab74-a103b375329d" name="Default" comment="fixed iv calc">
+    <list default="true" id="b9c3d3c3-30d3-4333-ab74-a103b375329d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/span_reader/instrumentconfig.json" afterPath="$PROJECT_DIR$/span_reader/instrumentconfig.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/span_reader/cme_span.py" afterPath="$PROJECT_DIR$/span_reader/cme_span.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -49,12 +49,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="instrumentconfig.json" pinned="false" current-in-tab="true">
+      <file leaf-file-name="instrumentconfig.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/span_reader/instrumentconfig.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="247">
               <caret line="156" column="49" lean-forward="true" selection-start-line="156" selection-start-column="49" selection-end-line="156" selection-end-column="49" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cme_span.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/span_reader/cme_span.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="159">
+              <caret line="87" column="50" lean-forward="false" selection-start-line="87" selection-start-column="50" selection-end-line="87" selection-end-column="50" />
+              <folding>
+                <element signature="e#24151#24207#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -70,7 +82,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Can't fine</find>
       <find>can't find</find>
       <find>VisibleDeprecationWarning</find>
       <find>testing</find>
@@ -100,6 +111,7 @@
       <find>option_span_cqg_code</find>
       <find>optcod</find>
       <find>optioncode</find>
+      <find>JY</find>
     </findStrings>
     <replaceStrings>
       <replace>'</replace>
@@ -154,12 +166,12 @@
         <option value="$PROJECT_DIR$/span_reader/run_span_import.py" />
         <option value="$PROJECT_DIR$/span_reader/option_calcs.py" />
         <option value="$PROJECT_DIR$/span_reader/span_objects.py" />
-        <option value="$PROJECT_DIR$/span_reader/cme_span.py" />
         <option value="$PROJECT_DIR$/run_cme_span_import_from_folder.py" />
         <option value="$PROJECT_DIR$/span_reader/mongo_queries.py" />
         <option value="$PROJECT_DIR$/span_reader/settings.py" />
         <option value="$PROJECT_DIR$/span_reader/instrument_info.py" />
         <option value="$PROJECT_DIR$/span_reader/instrumentconfig.json" />
+        <option value="$PROJECT_DIR$/span_reader/cme_span.py" />
       </list>
     </option>
   </component>
@@ -170,8 +182,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="7" />
-    <option name="y" value="5" />
+    <option name="x" value="-1288" />
+    <option name="y" value="-8" />
     <option name="width" value="1296" />
     <option name="height" value="1000" />
   </component>
@@ -695,11 +707,18 @@
       <option name="project" value="LOCAL" />
       <updated>1491938203078</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="fixed iv calc">
+      <created>1492112635478</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1492112635478</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="7" y="5" width="1296" height="1000" extended-state="0" />
+    <frame x="-1288" y="-8" width="1296" height="1000" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22087379" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
@@ -757,11 +776,11 @@
     <MESSAGE value="fixed cqg symbol call in ICE import" />
     <MESSAGE value="fixed gVega calc&#10;nd(d1)" />
     <MESSAGE value="added error catch for file object readlines" />
-    <MESSAGE value="fixed iv calc" />
     <MESSAGE value="updated for 6E etc" />
     <MESSAGE value="idinstrument filter changed to &gt;= 0" />
     <MESSAGE value="adjusted option collection index to include optioncode" />
-    <option name="LAST_COMMIT_MESSAGE" value="adjusted option collection index to include optioncode" />
+    <MESSAGE value="fixed iv calc" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed iv calc" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -971,8 +990,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#74#88#0" expanded="false" />
-            <element signature="e#24152#24208#0" expanded="false" />
+            <element signature="e#24151#24207#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1209,17 +1227,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/span_reader/cme_span.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7395">
-          <caret line="435" column="75" lean-forward="false" selection-start-line="435" selection-start-column="75" selection-end-line="435" selection-end-column="75" />
-          <folding>
-            <element signature="e#74#88#0" expanded="false" />
-            <element signature="e#24152#24208#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/span_reader/mongo_queries.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -1263,6 +1270,16 @@
         <state relative-caret-position="247">
           <caret line="156" column="49" lean-forward="true" selection-start-line="156" selection-start-column="49" selection-end-line="156" selection-end-column="49" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/span_reader/cme_span.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="87" column="50" lean-forward="false" selection-start-line="87" selection-start-column="50" selection-end-line="87" selection-end-column="50" />
+          <folding>
+            <element signature="e#24151#24207#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
