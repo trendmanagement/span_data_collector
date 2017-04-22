@@ -85,7 +85,7 @@ class CmeSpanImport(object):
 
             for instrument in self.instrumentInfo.instrument_list:
 
-                if instrument['idinstrument'] >= 0:
+                if instrument['idinstrument'] == 23:
 
                     if self.testing:
                         self.test_df = []
@@ -471,12 +471,17 @@ class CmeSpanImport(object):
                                 #id_option = self.mongo_queries.save_options_data(option_data_dict)
 
                                 if self.testing:
-                                    #pp = pprint.PrettyPrinter(indent=4)
-                                    #pp.pprint(option_data_dict)
+                                    option_data_dict_test = \
+                                        {
+                                            "timetoexpinyears": row_dstBe_option_info.option_time_to_exp,
+                                            "idoption": id_option,
+                                            "price_str": row_dst_8_OOF_e_option_data.settlement_price_str,
+                                            "price": row_dst_8_OOF_e_option_data.settlement_price,
+                                            "datetime": row_dst_8_OOF_e_option_data.span_file_date_time,
+                                            "impliedvol": row_dst_8_OOF_e_option_data.implied_vol
+                                        }
 
-                                    #df = pd.DataFrame.from_dict(option_data_dict, orient="index")
-                                    #self.test_df = self.test_df.append(df)
-                                    self.test_df.append(str(option_data_dict))
+                                    self.test_df.append(str(option_data_dict_test))
                                 else:
                                     self.mongo_queries.save_options_data(option_data_dict)
 

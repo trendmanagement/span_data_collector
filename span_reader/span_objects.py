@@ -134,13 +134,13 @@ class DataSpanType_8_Extract:
         '''extracts future price from file type 81'''
 
         try:
-            settlement_price_str = self.line[ \
+            self.settlement_price_str = self.line[ \
                                    CME_SPAN_TYPE_8_1.settlement_price_start: \
                                        CME_SPAN_TYPE_8_1.settlement_price_end].strip()
 
             #print('settlement_price_str', settlement_price_str)
 
-            self.settlement_price = self.settlement_find_closest_tick(settlement_price_str, tick_size, tick_display)
+            self.settlement_price = self.settlement_find_closest_tick(self.settlement_price_str, tick_size, tick_display)
 
             #print('^^^settlement_price', self.settlement_price)
         except:
@@ -151,13 +151,13 @@ class DataSpanType_8_Extract:
         '''extracts future price from file type 81'''
 
         try:
-            settlement_price_str = self.line[ \
+            self.settlement_price_str = self.line[ \
                 CME_SPAN_TYPE_8_2.settlement_price_start: \
                     CME_SPAN_TYPE_8_2.settlement_price_end].strip()
 
             #print('settlement_price_str', settlement_price_str)
 
-            self.settlement_price = self.settlement_find_closest_tick(settlement_price_str, tick_size, tick_display)
+            self.settlement_price = self.settlement_find_closest_tick(self.settlement_price_str, tick_size, tick_display)
 
             #print('^^^settlement_price', self.settlement_price)
         except:

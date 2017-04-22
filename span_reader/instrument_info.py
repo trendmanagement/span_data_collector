@@ -106,6 +106,12 @@ class InstrumentInfo(object):
 
                         # print('span_cqg_codes    ', instrument['span_cqg_codes'])
 
+                    if 'span_tick_configs' in json_instrumentconfig_data_dict[instrument['idinstrument']]:
+
+                        instrument['span_tick_configs'] = json_instrumentconfig_data_dict[instrument['idinstrument']]['span_tick_configs']
+
+                        # print('span_cqg_codes    ', instrument['span_cqg_codes'])
+
 
             '''below checks if the span_cqg_codes have been filled from the config file
             if not it will put in the default values'''
@@ -125,14 +131,14 @@ class InstrumentInfo(object):
             span_cqg_codes_dict_span_key = {}
 
             for rows_in_span_cqg_codes in instrument['span_cqg_codes']:
-                #print(x['cqg'], x['span'], x['optcod'])
                 span_cqg_codes_dict_span_key[rows_in_span_cqg_codes['span']] = rows_in_span_cqg_codes
-                #print(span_cqg_codes_dict_span_key[x['span']])
 
-            #print(span_cqg_codes_dict_span_key)
-            # print(instrument['span_cqg_codes'])
-            '''this is the '''
+            '''fills the span_cqg_codes dictionary into the instrument dictionary'''
             instrument['span_cqg_codes_dict'] = span_cqg_codes_dict_span_key
+
+
+
+
 
 
     def update_instrument_list(self, instrument, span_date):
@@ -145,6 +151,7 @@ class InstrumentInfo(object):
 
         try:
 
+            '''
             if instrument['idinstrument'] == 23:
 
                 if span_date < datetime(2016, 2, 22):
@@ -152,6 +159,47 @@ class InstrumentInfo(object):
 
                 if span_date < datetime(2016, 9, 9):
                     instrument['spanoptiontickdisplay'] = 1
+            '''
+
+            if 'span_tick_configs' in instrument:
+                if 'spantickdisplay' in instrument['span_tick_configs']:
+
+                    last_use_date = None
+                    for rows_in_spantickdisplay in instrument['span_tick_configs']['spantickdisplay']:
+
+                        use_date = datetime.strptime(rows_in_spantickdisplay['use_date'], '%Y-%m-%d')
+
+                        if span_date >= use_date \
+                                and (last_use_date == None or use_date >= last_use_date):
+                            instrument['spantickdisplay'] = rows_in_spantickdisplay['value']
+                            last_use_date = use_date
+
+                if 'spanoptiontickdisplay' in instrument['span_tick_configs']:
+
+                    last_use_date = None
+                    for rows_in_spanoptiontickdisplay in instrument['span_tick_configs']['spanoptiontickdisplay']:
+
+                        use_date = datetime.strptime(rows_in_spanoptiontickdisplay['use_date'], '%Y-%m-%d')
+
+                        if span_date >= use_date \
+                                and (last_use_date == None or use_date >= last_use_date):
+                            instrument['spanoptiontickdisplay'] = rows_in_spanoptiontickdisplay['value']
+                            last_use_date = use_date
+
+                if 'spanoptionticksize' in instrument['span_tick_configs']:
+
+                    last_use_date = None
+                    for rows_in_spanoptiontickdisplay in instrument['span_tick_configs']['spanoptionticksize']:
+
+                        use_date = datetime.strptime(rows_in_spanoptiontickdisplay['use_date'], '%Y-%m-%d')
+
+                        if span_date >= use_date \
+                                and (last_use_date == None or use_date >= last_use_date):
+                            instrument['spanoptionticksize'] = rows_in_spanoptiontickdisplay['value']
+                            last_use_date = use_date
+
+
+
 
         except:
 

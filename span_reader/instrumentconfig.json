@@ -2,10 +2,10 @@
   "instruments":
   [
     {
-      "idinstrument": 96,
-      "optionstrikeincrement": 0.01,
-      "optionstrikedisplay": 1,
-      "spanstrikedisplay": 1
+        "idinstrument": 96,
+        "optionstrikeincrement": 0.01,
+        "optionstrikedisplay": 1,
+        "spanstrikedisplay": 1
     },
     {
         "idinstrument": 2,
@@ -27,7 +27,41 @@
     },
     {
         "idinstrument": 23,
-        "optionstrikedisplay": 1000
+        "optionstrikedisplay": 1000,
+        "span_cqg_codes":[
+          {"cqg":"NLN","span":"LN","optcod":"LN"}
+          ],
+        "span_tick_configs": {
+          "spantickdisplay": [
+            {
+              "use_date": "1900-01-01",
+              "value": "100"
+            },
+            {
+              "use_date": "2016-02-22",
+              "value": "1"
+            }
+          ],
+
+          "spanoptionticksize": [
+            {
+              "use_date": "1900-01-01",
+              "value": "0.0001"
+            }
+          ],
+
+          "spanoptiontickdisplay": [
+            {
+              "use_date": "1900-01-01",
+              "value": "10"
+            },
+            {
+              "use_date": "2016-09-09",
+              "value": "1"
+            }
+          ]
+
+      }
     },
     {
         "idinstrument": 25,
