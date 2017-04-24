@@ -319,6 +319,10 @@ class IceSpanImport(object):
                 continue
 
             option_info_data = options_info.loc[odict['OptionMarketID']]
+            if 'idoption' not in option_info_data:
+                warnings.warn("CRITICAL: Stopped... Couldn't find any single options' expiration. Try to check availability of "
+                              "'contractsexpirations' collection in MongoDB: {0} at {1}".format(MONGO_EXO_DB, MONGO_CONNSTR))
+                break
             idoption = option_info_data['idoption']
             option_expiration = option_info_data['expiration']
             if np.isnan(idoption):
