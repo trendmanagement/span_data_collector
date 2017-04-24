@@ -216,7 +216,14 @@ class IceSpanImport(object):
         :return:
         """
 
+        def option_id_fix(df_row):
+            """Fixed absent OptionMarketID for some products """
+            return "{0}_{1}_{2}_{3}".format(df_row['ProductID'], df_row['OptionType'], df_row['StripName'],
+                                            df_row['StrikePrice'])
+
         options_df['UnderlyingMarketID'] = options_df['UnderlyingMarketID'].astype(str)
+        options_df['OptionMarketID'] = options_df.apply(option_id_fix, axis=1)
+
         grp_opt = options_df.groupby(by='OptionMarketID').last()
         grp_opt['year'] = grp_opt['StripName'].apply(self.get_year)
         grp_opt['month'] = grp_opt['StripName'].apply(self.get_code_by_month)

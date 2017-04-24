@@ -25,6 +25,6 @@ csi = IceSpanImport(None)
 #options_filepath = "C:/ICE_DATA/EOD_Options_578_2016.csv"
 
 futures_filepath = "/home/ubertrader/Downloads/EOD_Futures_ProductFile_ProductID(578).csv"
-options_filepath = "/home/ubertrader/Downloads/EOD_Options_578_2016.csv"
+options_filepath = "/home/ubertrader/Downloads/EOD_Options_578_2011.csv"
 
 csi.load_span_file(futures_filepath, options_filepath)
