@@ -17,6 +17,7 @@ DEFAULT_SPAN_FOLDER = 'C:/Span_Procedures_Cloud/SPAN_DATA/'
 DEFAULT_SPAN_FOLDER_MULTIPLE_FILES = 'C:/CME_SPAN_FILES/'
     #'C:/Users/Steve Pickering/Desktop/span_data_collector/CME_SPAN'
     #'C:/CME_SPAN_FILES/'
+    #'F:/SPAN DATA/CME/2017 CME Extracted'
 
 
 # Allow any settings to be defined in settings_local.py which should be

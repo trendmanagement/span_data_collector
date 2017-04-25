@@ -85,7 +85,7 @@ class CmeSpanImport(object):
 
             for instrument in self.instrumentInfo.instrument_list:
 
-                if instrument['idinstrument'] >= 0:
+                if instrument['idinstrument'] == 23:
 
                     if self.testing:
                         self.test_df = []
@@ -287,11 +287,14 @@ class CmeSpanImport(object):
                         #self.mongo_queries.save_futures_settlement(info_dict)
 
                         if self.testing:
-                            #pp = pprint.PrettyPrinter(indent=4)
-                            #pp.pprint(info_dict)
+                            info_dict = \
+                                {'idcontract': row_dstBe_future.idcontract,
+                                 'settlement': row_dst_8_F_e_future_data.settlement_price,
+                                 'settlement_price_str':row_dst_8_F_e_future_data.settlement_price_str,
+                                 'openinterest': 0,
+                                 'volume': 0,
+                                 'date': row_dst_8_F_e_future_data.span_file_date_time}
 
-                            #df = pd.DataFrame.from_dict(info_dict, orient="index")
-                            #self.test_df = self.test_df.append(df)
                             self.test_df.append(str(info_dict))
                         else:
                             self.mongo_queries.save_futures_settlement(info_dict)
