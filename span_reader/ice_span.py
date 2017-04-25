@@ -347,6 +347,8 @@ class IceSpanImport(object):
                 fut_contract_data = futures_df[futures_df['MarketID'] == ulmktid].ix[
                     opt_current_date]
                 underlying_px = fut_contract_data['SettlementPrice']
+                if np.isnan(underlying_px):
+                    continue
             except KeyError:
                 continue
 
