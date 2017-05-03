@@ -52,7 +52,8 @@ class CmeSpanImport(object):
 
         if os.path.exists(self.filepath):
 
-            self.signalapp.send(MsgStatus('HISTORICAL_LOAD',
+            if PUSH_SLACK_LOGGING:
+                self.signalapp.send(MsgStatus('HISTORICAL_LOAD',
                                           'Initialized data load {0}'.format(self.short_file_name), notify=True))
 
             self.filled_risk_free_rate = False
@@ -124,8 +125,9 @@ class CmeSpanImport(object):
                                 self.extract_rowtype_0(line_in = line, instrument_symbol = instrument)
 
                                 '''
-                                self.signalapp.send(
-                                    MsgStatus('HISTORICAL_LOAD',
+                                if PUSH_SLACK_LOGGING:
+                                    self.signalapp.send(
+                                        MsgStatus('HISTORICAL_LOAD',
                                               'Initialized Loading {0} {1}'.format(instrument['symbol'],
                                                                                    self.span_file_date_time.strftime(
                                                                                        '%b %d %Y')),
@@ -517,8 +519,9 @@ class CmeSpanImport(object):
 
                     print('finished', instrument['symbol'])
 
-                    self.signalapp.send(
-                        MsgStatus('HISTORICAL_LOAD',
+                    if PUSH_SLACK_LOGGING:
+                        self.signalapp.send(
+                            MsgStatus('HISTORICAL_LOAD',
                                   'Loaded {0} {1}'.format(instrument['symbol'],
                                                                     self.span_file_date_time.strftime('%b %d %Y')),
                                   notify=True))
