@@ -17,7 +17,7 @@ APPCLASS_EXO = "ExoEngine"
 APPCLASS_ALPHA = "AlphaStrategy"
 APPCLASS_SIGNALS = "Signals"
 APPCLASS_UTILS  = 'Utils'
-APPCLASS_HISTORICAL = 'HistoricalUpdate'
+APPCLASS_HISTORICAL = "HistoricalData"
 
 import logging
 import pika

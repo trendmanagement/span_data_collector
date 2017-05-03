@@ -3,15 +3,14 @@ This is the main class for importing data from the CME SPAN FILES
 """
 import os.path
 import ntpath
-import pprint
-import json
-import csv
-import pandas as pd
 from span_reader.instrument_info import InstrumentInfo
 from span_reader.span_objects import *
 from span_reader.option_calcs import calculateOptionVolatilityNR
 from span_reader.mongo_queries import MongoQueries
 import warnings
+from tradingcore.signalapp import SignalApp, APPCLASS_DATA
+from tradingcore.messages import *
+from span_reader.settings import *
 
 
 class CmeSpanImport(object):
@@ -37,6 +36,8 @@ class CmeSpanImport(object):
 
         self.instrumentInfo = InstrumentInfo(optionenabled=self.optionenabled)
 
+        self.signalapp = SignalApp('historicaldata', APPCLASS_DATA, RABBIT_HOST, RABBIT_USER, RABBIT_PASSW)
+
 
     def load_span_file(self, filepath):
         """
@@ -50,6 +51,9 @@ class CmeSpanImport(object):
         #print(self.filepath)
 
         if os.path.exists(self.filepath):
+
+            self.signalapp.send(MsgStatus('HISTORICAL_LOAD',
+                                          'Initialized data load {0}'.format(self.short_file_name), notify=True))
 
             self.filled_risk_free_rate = False
 
@@ -102,6 +106,8 @@ class CmeSpanImport(object):
 
                     print('running',instrument['symbol'])
 
+
+
                     for line in file_lines:
 
                         #print(line)
@@ -116,6 +122,15 @@ class CmeSpanImport(object):
                             if len(line) > 0:
 
                                 self.extract_rowtype_0(line_in = line, instrument_symbol = instrument)
+
+                                '''
+                                self.signalapp.send(
+                                    MsgStatus('HISTORICAL_LOAD',
+                                              'Initialized Loading {0} {1}'.format(instrument['symbol'],
+                                                                                   self.span_file_date_time.strftime(
+                                                                                       '%b %d %Y')),
+                                              notify=True))
+                                              '''
 
                             '''get the interest rate from the database after date is extracted from rowtype_0'''
 
@@ -502,7 +517,11 @@ class CmeSpanImport(object):
 
                     print('finished', instrument['symbol'])
 
-
+                    self.signalapp.send(
+                        MsgStatus('HISTORICAL_LOAD',
+                                  'Loaded {0} {1}'.format(instrument['symbol'],
+                                                                    self.span_file_date_time.strftime('%b %d %Y')),
+                                  notify=True))
 
     def get_cme_line_type(self, line = ''):
         """

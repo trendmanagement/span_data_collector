@@ -10,9 +10,9 @@ DEFAULT_SPAN_FOLDER_MULTIPLE_FILES = 'C:/CME_SPAN_FILES/'
 
 #
 # RabbitMQ credentials
-RABBIT_HOST = 'localhost'
-RABBIT_USER = 'guest'
-RABBIT_PASSW = 'guest'
+RABBIT_HOST = '10.0.1.2'
+RABBIT_USER = 'tmqr'
+RABBIT_PASSW = 'tmqr'
 
 # Allow any settings to be defined in settings_local.py which should be
 # ignored in your version control system allowing for settings to be
