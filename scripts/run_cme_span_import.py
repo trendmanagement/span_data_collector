@@ -16,7 +16,7 @@ csi = CmeSpanImport(input_args)
 date = dt.datetime.now().date()
 if date.weekday() == 0:
     date += dt.timedelta(days=-3)
-elif date.weekday() == 5:
+elif date.weekday() == 6:
     date += dt.timedelta(days=-2)
 else:
     date += dt.timedelta(days=-1)

@@ -14,7 +14,7 @@ input_args['testing'] = True
 
 csi = CmeSpanImport(input_args)
 
-filepath = "C:\\Users\\Steve Pickering\\Desktop\\span_data_collector\\cme.20110103.c.pa2"
+filepath = "C:\\Users\\Steve Pickering\\Desktop\\span_data_collector\\cme.20170428.c.pa2"
 
 csi.load_span_file(filepath)
 
