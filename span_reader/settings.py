@@ -6,9 +6,13 @@ INSTRUMENT_CONFIG_JSON_FILE = 'C:/Span_Procedures_Cloud/span_data_collector-mast
 
 DEFAULT_SPAN_FOLDER = 'C:/Span_Procedures_Cloud/SPAN_DATA/'
 
-DEFAULT_SPAN_FOLDER_MULTIPLE_FILES = 'C:/CME_SPAN_FILES/'
+DEFAULT_SPAN_FOLDER_MULTIPLE_FILES = '//10.0.1.4/backup/backups/CME Span/'
+#'C:/CME_SPAN_FILES/'
 
 PUSH_SLACK_LOGGING = True
+
+#Set to None to run all instruments, otherwise fill as an array [11,21]
+RUN_SPECIFIC_INSTRUMENT_ID = None
 
 #
 # RabbitMQ credentials

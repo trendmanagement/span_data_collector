@@ -90,7 +90,8 @@ class CmeSpanImport(object):
 
             for instrument in self.instrumentInfo.instrument_list:
 
-                if instrument['idinstrument'] >= 0:
+                if RUN_SPECIFIC_INSTRUMENT_ID is None\
+                        or instrument['idinstrument'] in RUN_SPECIFIC_INSTRUMENT_ID:
 
                     if self.testing:
                         self.test_df = []
