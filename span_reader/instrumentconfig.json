@@ -35,25 +35,25 @@
           "spantickdisplay": [
             {
               "use_date": "1900-01-01",
-              "value": "1"
+              "value": 1
             },
             {
               "use_date": "2016-02-22",
-              "value": "100"
+              "value": 100
             }
           ],
 
           "spanoptionticksize": [
             {
               "use_date": "1900-01-01",
-              "value": "0.0001"
+              "value": 0.0001
             }
           ],
 
           "spanoptiontickdisplay": [
             {
               "use_date": "1900-01-01",
-              "value": "1"
+              "value": 1
             }
           ]
 

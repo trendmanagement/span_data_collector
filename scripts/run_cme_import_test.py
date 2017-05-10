@@ -10,7 +10,6 @@ print(RABBIT_PASSW)
 input_args = {}
 
 input_args['optionenabled'] = 2
-input_args['testing'] = True
 
 csi = CmeSpanImport(input_args)
 

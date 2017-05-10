@@ -24,13 +24,11 @@ class CmeSpanImport(object):
         if args != None:
             self.args = args
             self.optionenabled = args['optionenabled']
-            self.testing = args['testing']
 
         else:
             self.optionenabled = 2
-            self.testing = True
 
-
+        self.testing = TESTING
 
         self.mongo_queries = MongoQueries()
 
