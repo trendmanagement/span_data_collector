@@ -2,6 +2,7 @@ TESTING = False
 
 MONGO_CONNSTR = 'mongodb://tmqr:tmqr@10.0.1.2/tmldb_v2?authMechanism=SCRAM-SHA-1'
 MONGO_EXO_DB = 'tmldb_v2'
+MONGO_SPAN_DATA = 'span_data'
 
 INSTRUMENT_CONFIG_JSON_FILE = 'C:/Span_Procedures_Cloud/span_data_collector-master/span_reader/instrumentconfig.json'
 

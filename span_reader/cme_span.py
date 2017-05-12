@@ -5,13 +5,19 @@ import os.path
 import ntpath
 from span_reader.instrument_info import InstrumentInfo
 from span_reader.span_objects import *
-from span_reader.option_calcs import calculateOptionVolatilityNR
 from span_reader.mongo_queries import MongoQueries
 import warnings
 from tradingcore.signalapp import SignalApp, APPCLASS_DATA
 from tradingcore.messages import *
 from span_reader.settings import *
+import numpy as np
+#from span_reader.option_calcs import calculateOptionVolatilityNR
 
+import pyximport; pyximport.install(setup_args={"include_dirs": np.get_include()})
+#import span_reader.helloworld
+from span_reader.option_calcs_fast import calculateOptionVolatilityNR
+
+#C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build
 
 class CmeSpanImport(object):
     """
@@ -83,6 +89,11 @@ class CmeSpanImport(object):
             #print(file_lines)
 
             #print('test ', self.filepath)
+
+            #file_lines = self.mongo_queries.save_span_file(file_lines, file_name=self.short_file_name,
+            #                                  full_file_name=self.filepath)
+
+
 
             data_row_type = SPAN_FILE_ROW_TYPES.TYPE_NULL
 

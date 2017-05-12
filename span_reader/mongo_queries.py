@@ -1,7 +1,8 @@
 from span_reader.settings import *
 from pymongo import MongoClient, ReturnDocument
 import pymongo
-import pprint
+import gridfs
+#import pprint
 
 COUNTER_FUTURES = 'idcontract'
 COUNTER_OPTIONS = 'idoption'
@@ -11,6 +12,7 @@ class MongoQueries():
     def __init__(self, args=None):
         self.mongoclient = MongoClient(MONGO_CONNSTR)
         self.db = self.mongoclient[MONGO_EXO_DB]
+        #self.span_db = self.mongoclient[MONGO_SPAN_DATA]
 
         # Creating collection indexes for performance
         self.init_collection_indexes()
@@ -97,6 +99,53 @@ class MongoQueries():
                 return new_counter_id
             else:
                 return doc_update_message[counter_name]
+
+    def save_span_file(self,file_object,file_name,full_file_name):
+        fs = gridfs.GridFS(self.span_db)
+        a = fs.new_file(filename=file_name, content_type="text/plain")
+
+        #a.writelines(file_object.("UTF-8"))
+        #a.write("test".encode(encoding='utf-8'))
+        #a.close()
+       # w = []
+        for i in file_object:
+        #    w.append(str(i).encode(encoding='utf-8'))
+            a.write(str(i).encode(encoding='ASCII'))
+
+        #a.writelines(w)
+
+        a.close()
+
+        out = fs.get(a._id)
+
+        file_linesx = []
+        while True:
+            try:
+                line = out.readline()
+
+                while line:
+                    try:
+                        file_linesx.append(line)
+                        line = out.readline()
+                    except:
+                        #warnings.warn("Can't Import File Line")
+                        continue
+
+                break
+            except:
+                continue
+
+        return file_linesx
+
+        #print(out.read())
+
+        #print("test")
+        #import codecs
+        #with codecs.open(full_file_name,"r",encoding='ASCII') as myimage:
+        #    oid = fs.put(myimage, content_type="text/plain", filename="myimage")
+
+        #fs.put("hello world".encode(encoding='utf-8'),content_type="text/plain")
+
 
 
     def save_future_info(self, info_dict):
