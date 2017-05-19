@@ -6,7 +6,7 @@ from math import floor
 class ConversionAndRounding:
     #def __init__(self):
 
-    def convertToStrikeForCQGSymbol(self, barVal, tickIncrementIn, tickDisplayIn, idInstrument, is_cme_data = False):
+    def convertToStrikeForCQGSymbol(self, barVal, tickIncrementIn, tickDisplayIn, idInstrument, use_json_cfg = False):
 
         #instrumentIdArrayCheck = [1, 360, 2, 3, 21, 23, 25, 31, 32, 33, 34, 35, 39, 40, 42, 43, 51, 52, 53, 54, 99, 101,102, 200,210,220,360, 400,532,11,12]
 
@@ -20,7 +20,7 @@ class ConversionAndRounding:
 
         elif (idInstrument == 2 or idInstrument == 3 or idInstrument == 21 or idInstrument == 23 or idInstrument == 25 or idInstrument == 31):
         '''
-        if is_cme_data:
+        if use_json_cfg:
             return int(round(barVal * tickDisplayIn))
 
         else:

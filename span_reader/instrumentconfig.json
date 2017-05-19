@@ -186,6 +186,15 @@
 		{"cqg":"BP4","span":"4BP","optcod":"4BP"},
 		{"cqg":"BP5","span":"5BP","optcod":"5BP"}
 		]
+    },
+
+    {
+        "idinstrument": 36,
+        "optionstrikedisplay": 1
+    },
+    {
+        "idinstrument": 500,
+        "optionstrikedisplay": 100
     }
   ]
 }

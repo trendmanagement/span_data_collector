@@ -11,11 +11,11 @@ from tradingcore.signalapp import SignalApp, APPCLASS_DATA
 from tradingcore.messages import *
 from span_reader.settings import *
 import numpy as np
-#from span_reader.option_calcs import calculateOptionVolatilityNR
+from span_reader.option_calcs import calculateOptionVolatilityNR
 
-import pyximport; pyximport.install(setup_args={"include_dirs": np.get_include()})
+#import pyximport; pyximport.install(setup_args={"include_dirs": np.get_include()})
 #import span_reader.helloworld
-from span_reader.option_calcs_fast import calculateOptionVolatilityNR
+#from span_reader.option_calcs_fast import calculateOptionVolatilityNR
 
 #C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build
 
