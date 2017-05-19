@@ -1,5 +1,7 @@
 TESTING = False
 
+ICE_INSTRUMENT_ID = None
+
 MONGO_CONNSTR = 'mongodb://tmqr:tmqr@10.0.1.2/tmldb_v2?authMechanism=SCRAM-SHA-1'
 MONGO_EXO_DB = 'tmldb_v2'
 MONGO_SPAN_DATA = 'span_data'

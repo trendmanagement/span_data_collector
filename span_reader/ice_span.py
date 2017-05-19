@@ -40,12 +40,16 @@ class IceSpanImport(object):
 
     def __init__(self, args=None):
 
-        if args != None:
-            self.args = args
-            self.idinstrument = args['optionenabled']
+        #if args != None:
+        #    self.args = args
+        #    self.idinstrument = args['optionenabled']
 
-        else:
-            self.idinstrument = 36
+        #else:
+        #    self.idinstrument = 36
+
+        assert (ICE_INSTRUMENT_ID != None)
+
+        self.idinstrument = ICE_INSTRUMENT_ID
 
         self.mongo_queries = MongoQueries()
         self.datasource = DataSourceMongo(MONGO_CONNSTR, MONGO_EXO_DB)
@@ -140,14 +144,15 @@ class IceSpanImport(object):
                                             self.instrumentInfo['cqgsymbol'],
                                             df_row['month'],
                                             df_row['year'] % 100,
-                                            ConversionAndRounding.convertToStrikeForCQGSymbol(df_row['StrikePrice'],
+                                            ConversionAndRounding.convertToStrikeForCQGSymbol(self,
+                                                                                              df_row['StrikePrice'],
                                                                                               self.instrumentInfo[
                                                                                                   'optionstrikeincrement'],
                                                                                               self.instrumentInfo[
-                                                                                                  'spanstrikedisplay'],
+                                                                                                  'optionstrikedisplay'],
                                                                                               self.instrumentInfo[
                                                                                                   'idinstrument'],
-                                                                                              False),
+                                                                                              use_json_cfg=True)
                                             )
 
     def get_expiration_date(self, df_row, contr_type):

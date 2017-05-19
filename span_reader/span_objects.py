@@ -104,7 +104,7 @@ class DataSpanType_8_Extract:
                                                               self.option_strike_price,
                                                               self.instrument['optionstrikeincrement'],
                                                               self.instrument['optionstrikedisplay'],
-                                                              self.instrument['idinstrument'], is_cme_data = True)))
+                                                              self.instrument['idinstrument'], use_json_cfg = True)))
 
         except:
             print("extract_rowtype_8 error")
