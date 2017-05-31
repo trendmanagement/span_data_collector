@@ -268,13 +268,13 @@ class IceSpanImport(object):
 
             info_dict = {
                 "expirationdate": odict['expiration'],
-                "idinstrument": self.instrumentInfo['idinstrument'],
+                "idinstrument": int(self.instrumentInfo['idinstrument']),
                 "strikeprice": odict['StrikePrice'],
                 "callorput": odict['OptionType'].upper(),
                 "optionname": odict['contractname'],
                 "optionmonthint": odict['monthint'],
                 "cqgsymbol": odict['cqgname'],
-                "idcontract": fut_contract_id,
+                "idcontract": int(fut_contract_id),
                 "optionmonth": odict['month'],
                 "optionyear": odict['year'],
             }

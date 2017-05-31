@@ -92,10 +92,6 @@
         "optionstrikedisplay": 1000
     },
     {
-        "idinstrument": 51,
-        "optionstrikedisplay": 10000
-    },
-    {
         "idinstrument": 99,
         "optionstrikedisplay": 10000
     },
@@ -149,6 +145,19 @@
 		]
     },
     {
+        "idinstrument": 51,
+        "optionstrikedisplay": 10000,
+        "span_cqg_codes":[
+          {"cqg":"CA6","span":"C1","optcod":" "},
+          {"cqg":"CAE","span":"CAU","optcod":"CAU"},
+          {"cqg":"CA1","span":"1CD","optcod":"1CD"},
+          {"cqg":"CA2","span":"2CD","optcod":"2CD"},
+          {"cqg":"CA3","span":"3CD","optcod":"3CD"},
+          {"cqg":"CA4","span":"4CD","optcod":"4CD"},
+          {"cqg":"CA5","span":"5CD","optcod":"5CD"}
+          ]
+    },
+    {
       "idinstrument": 52,
       "optionstrikedisplay": 10000,
 	  "span_cqg_codes":[
@@ -185,6 +194,34 @@
 		{"cqg":"BP3","span":"3BP","optcod":"3BP"},
 		{"cqg":"BP4","span":"4BP","optcod":"4BP"},
 		{"cqg":"BP5","span":"5BP","optcod":"5BP"}
+		]
+    },
+
+    {
+      "idinstrument": 99,
+      "optionstrikedisplay": 10000,
+	  "span_cqg_codes":[
+		{"cqg":"DA6","span":"AD","optcod":" "},
+		{"cqg":"DAE","span":"ADU","optcod":"ADU"},
+		{"cqg":"DA1","span":"1AD","optcod":"1AD"},
+		{"cqg":"DA2","span":"2AD","optcod":"2AD"},
+		{"cqg":"DA3","span":"3AD","optcod":"3AD"},
+		{"cqg":"DA4","span":"4AD","optcod":"4AD"},
+		{"cqg":"DA5","span":"5AD","optcod":"5AD"}
+		]
+    },
+
+    {
+      "idinstrument": 102,
+      "optionstrikedisplay": 10000,
+	  "span_cqg_codes":[
+		{"cqg":"SF6","span":"E1","optcod":" "},
+		{"cqg":"SFA","span":"CHU","optcod":"CHU"},
+		{"cqg":"SFA1","span":"1SF","optcod":"1SF"},
+		{"cqg":"SFA2","span":"2SF","optcod":"2SF"},
+		{"cqg":"SFA3","span":"3SF","optcod":"3SF"},
+		{"cqg":"SFA4","span":"4SF","optcod":"4SF"},
+		{"cqg":"SFA5","span":"5SF","optcod":"5SF"}
 		]
     },
 
