@@ -1,6 +1,7 @@
 import os
-import datetime as dt
+#import datetime as dt
 from span_reader.settings import *
+from tqdm import tqdm, tnrange, tqdm_notebook
 
 from span_reader.cme_span import CmeSpanImport
 
@@ -19,6 +20,9 @@ if os.path.isdir(DEFAULT_SPAN_FOLDER_MULTIPLE_FILES):
 
 
 
+    max_steps = len(os.listdir(DEFAULT_SPAN_FOLDER_MULTIPLE_FILES))
+    pbar = tqdm(desc="Progress", total=max_steps)
+
     for file in os.listdir(DEFAULT_SPAN_FOLDER_MULTIPLE_FILES):
         if file.endswith(".pa2"):
             print(os.path.join(DEFAULT_SPAN_FOLDER_MULTIPLE_FILES, file))
@@ -29,3 +33,5 @@ if os.path.isdir(DEFAULT_SPAN_FOLDER_MULTIPLE_FILES):
             thefile = open("progress_data.txt", 'a')
             thefile.write("%s\n" % file)
             thefile.close()
+
+            pbar.update(1)

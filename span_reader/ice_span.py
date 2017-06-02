@@ -16,12 +16,15 @@ from pathlib import Path'''
 import pandas as pd
 from span_reader.instrument_info import InstrumentInfo
 from span_reader.span_objects import *
-from span_reader.option_calcs import calculateOptionVolatilityNR, to_expiration_years
+#from span_reader.option_calcs import calculateOptionVolatilityNR, to_expiration_years
 from span_reader.mongo_queries import MongoQueries
 from span_reader.datasource_mongo import DataSourceMongo
 from span_reader.settings import *
 import warnings
 import numpy as np
+
+import pyximport; pyximport.install(setup_args={"include_dirs": np.get_include()})
+from span_reader.option_calcs_fast import calculateOptionVolatilityNR, to_expiration_years
 
 
 class IceFutureInfo:
@@ -263,7 +266,7 @@ class IceSpanImport(object):
 
             options_info.at[odf_idx, 'idcontract'] = fut_contract_id
 
-            if pd.isnull(odict['expiration']):
+            if pd.isnull(odict['expiration']) or np.isnan(fut_contract_id):
                 continue
 
             info_dict = {
