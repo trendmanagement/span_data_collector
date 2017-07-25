@@ -249,7 +249,13 @@ class IceSpanImport(object):
                 fut_contract_id = fut_contract_data['idcontract']
             except KeyError:
                 try:
-                    fut_contract_data = futures_info[(futures_info.year >= odict.year) & (futures_info.monthint > odict.monthint)].iloc[0]
+                    if futures_info[(futures_info.year >= odict.year) & (futures_info.monthint > odict.monthint)].empty:
+                        fut_contract_data = futures_info[(futures_info.year > odict.year)].sort_values(['year','monthint'], ascending=[True, True]).iloc[0]
+                    else:
+                        fut_contract_data = futures_info[(futures_info.year >= odict.year) & (futures_info.monthint > odict.monthint)] \
+                            .sort_values(['year','monthint'], ascending=[True, True]).iloc[0]
+
+                    #fut_contract_data = futures_info[(futures_info.year >= odict.year) & (futures_info.monthint > odict.monthint)].iloc[0]
                     fut_contract_id = fut_contract_data['idcontract']
                     if odict['UnderlyingMarketID'] in self.serial_months_map:
                         assert self.serial_months_map[odict['UnderlyingMarketID']] == fut_contract_data.name, 'Unexpected UnderlyingMarketID map'
