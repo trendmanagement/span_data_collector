@@ -390,7 +390,7 @@ class IceSpanImport(object):
 
             info_dict = {
                 "timetoexpinyears": opt_timetoexp_in_years,
-                "idoption": idoption,
+                "idoption": int(idoption),
                 "price": opt_settle_px,
                 "datetime": opt_current_date,
                 "impliedvol": iv,
