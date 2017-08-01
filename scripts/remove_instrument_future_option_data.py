@@ -8,6 +8,8 @@ from tqdm import tqdm, tnrange, tqdm_notebook
 
 #from scripts.settings import *
 
+IDINSTRUMENT = None
+
 def convert_dates(values):
     k,v = values
     if type(v) == datetime.date:
@@ -55,7 +57,7 @@ mongo_db = client[MONGO_EXO_DB]
 ############################################################################
 
 options_col = mongo_db['options']
-options_mongo = options_col.find({'idinstrument':500})
+options_mongo = options_col.find({'idinstrument':IDINSTRUMENT})
 contracts_dict = {}
 
 max_steps = options_mongo.count()
@@ -82,7 +84,7 @@ print('options done')
 
 ##########
 contracts_col = mongo_db['contracts']
-contracts_mongo = contracts_col.find({'idinstrument':500})
+contracts_mongo = contracts_col.find({'idinstrument':IDINSTRUMENT})
 contracts_dict = {}
 
 max_steps = contracts_mongo.count()
