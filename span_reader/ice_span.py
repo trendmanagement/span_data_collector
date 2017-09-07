@@ -315,7 +315,7 @@ class IceSpanImport(object):
             contract_id = futures_info.loc[fdict['MarketID']]['idcontract']
             assert contract_id is not None
 
-            info_dict = {'idcontract': contract_id,
+            info_dict = {'idcontract': int(contract_id),
                          'settlement': settle_px,
                          'openinterest': oi,
                          'volume': volume,
