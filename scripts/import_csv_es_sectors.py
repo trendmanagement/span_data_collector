@@ -54,12 +54,12 @@ for filename in os.listdir( path ):
 
         info_dict = {
             "idcontract": contract['idcontract'],
-            "open": row[1],
-            "high": row[2],
-            "low": row[3],
-            "close": row[4],
+            "open": float(row[1]),
+            "high": float(row[2]),
+            "low": float(row[3]),
+            "close": float(row[4]),
             "datetime": row['Date_Time'],
-            "volume": row['Vol']
+            "volume": float(row['Vol'])
         }
 
         #print(info_dict)
