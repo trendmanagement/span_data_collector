@@ -46,7 +46,11 @@ ice_instrument_list = {
             'option_file': 'EOD_Options_582_'},
     'CC':{'folder':'cocoa/',
          'future_file':'EOD_Futures_578_',
-            'option_file': 'EOD_Options_578_'}
+            'option_file': 'EOD_Options_578_'},
+
+    'KC':{'folder':'coffee/',
+         'future_file':'EOD_Futures_580_',
+            'option_file': 'EOD_Options_580_'}
 }
 
 if idinstrument:
@@ -68,9 +72,9 @@ if idinstrument:
     else:
         end_year = int(args.end_year)
 
+    print(idinstrument[0]['idinstrument'])
 
-
-    csi = IceSpanImport(idinstrument[0])
+    csi = IceSpanImport(idinstrument[0]['idinstrument'])
 
     for year in range(start_year, end_year+1):
         futures_filepath = folder + instrument_info['future_file'] +  "{0}.csv".format(year)
