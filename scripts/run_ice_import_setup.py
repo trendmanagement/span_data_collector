@@ -76,4 +76,4 @@ if idinstrument:
         futures_filepath = folder + instrument_info['future_file'] +  "{0}.csv".format(year)
         options_filepath = folder + instrument_info['option_file'] +  "{0}.csv".format(year)
         print(futures_filepath, options_filepath)
-        # csi.load_span_file(futures_filepath, options_filepath)
+        csi.load_span_file(futures_filepath, options_filepath)
