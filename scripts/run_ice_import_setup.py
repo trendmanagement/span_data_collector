@@ -24,6 +24,14 @@ parser.add_argument("-y",
                     required=False,
                     type=str)
 
+parser.add_argument("-ey",
+                    "--end_year",
+                    help="year to end file to load",
+                    required=False,
+                    type=str)
+
+
+
 args = parser.parse_args()
 
 client = MongoClient(MONGO_CONNSTR)
@@ -51,16 +59,21 @@ if idinstrument:
         folder = args.folder
 
     if args.year == None:
-        year_start = datetime.now().year
+        start_year = datetime.now().year
     else:
-        year_start = args.year
+        start_year = int(args.year)
+
+    if args.end_year == None:
+        end_year = datetime.now().year
+    else:
+        end_year = int(args.end_year)
 
 
 
     csi = IceSpanImport(idinstrument[0])
 
-    for year in range(year_start,datetime.now().year+1):
+    for year in range(start_year, end_year+1):
         futures_filepath = folder + instrument_info['future_file'] +  "{0}.csv".format(year)
         options_filepath = folder + instrument_info['option_file'] +  "{0}.csv".format(year)
         print(futures_filepath, options_filepath)
-        csi.load_span_file(futures_filepath, options_filepath)
+        # csi.load_span_file(futures_filepath, options_filepath)
