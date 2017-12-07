@@ -8,7 +8,7 @@ from tqdm import tqdm, tnrange, tqdm_notebook
 
 #from scripts.settings import *
 
-IDINSTRUMENT = None
+IDINSTRUMENT = 500
 
 def convert_dates(values):
     k,v = values
@@ -56,31 +56,6 @@ mongo_db = client[MONGO_EXO_DB]
 #print('Bar data')
 ############################################################################
 
-options_col = mongo_db['options']
-options_mongo = options_col.find({'idinstrument':IDINSTRUMENT})
-contracts_dict = {}
-
-max_steps = options_mongo.count()
-pbar = tqdm(desc="Progress", total=max_steps)
-
-option_data_col = mongo_db['options_data']
-
-options_remove_col = mongo_db['options']
-
-for option_mongo in options_mongo:
-    #print(option_mongo['idoption'])
-    done = option_data_col.remove({'idoption': option_mongo['idoption']})
-
-    options_remove_col.remove({'idoption': option_mongo['idoption']})
-
-    #print(done)
-    #option_data_list = option_data_col.find({'idoption': option_mongo['idoption']})
-    #for option_data in option_data_list:
-    #    print(option_data['idoption'])
-    pbar.update(1)
-
-print('options done')
-
 
 ##########
 contracts_col = mongo_db['contracts']
@@ -94,7 +69,7 @@ contract_data_col = mongo_db['futures_contract_settlements']
 
 for contracts in contracts_mongo:
     #print(option_mongo['idoption'])
-    done = contract_data_col.remove({'idcontract': contracts['idcontract']})
+    done = contract_data_col.update_many({'idcontract': contracts['idcontract']},{'$set':{'idcontract':int(contracts['idcontract'])}},upsert=False)
 
     pbar.update(1)
 

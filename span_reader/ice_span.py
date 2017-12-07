@@ -41,7 +41,7 @@ class IceSpanImport(object):
         The object that contains methods to import span data into mongodb
     """
 
-    def __init__(self, args=None):
+    def __init__(self, ICE_INSTRUMENT_ID):
 
         #if args != None:
         #    self.args = args
