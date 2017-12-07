@@ -1,8 +1,6 @@
 
 from span_reader.ice_span import IceSpanImport
 
-#input_args['idinstrument'] = 36
-
 csi = IceSpanImport(None)
 
 #futures_filepath = "C:\\Users\\Steve Pickering\\Desktop\\span_data_collector\\Cocoa Data\\futures\\EOD_Futures_ProductFile_ProductID(578).csv"
@@ -19,8 +17,10 @@ csi = IceSpanImport(None)
 #futures_filepath = "/home/ubertrader/Downloads/EOD_Futures_ProductFile_ProductID(578).csv"
 #options_filepath = "/home/ubertrader/Downloads/EOD_Options_578_2013.csv"
 
-for year in range(2011,2017+1):
-    futures_filepath = "//10.0.1.4/backup/backups/ICE_DATA/sugar/EOD_Futures_582_{0}.csv".format(year)
-    options_filepath = "//10.0.1.4/backup/backups/ICE_DATA/sugar/EOD_Options_582_{0}.csv".format(year)
+for year in range(2017,2017+1):
+    # futures_filepath = "//10.0.1.4/backup/backups/ICE_DATA/sugar/EOD_Futures_582_{0}.csv".format(year)
+    # options_filepath = "//10.0.1.4/backup/backups/ICE_DATA/sugar/EOD_Options_582_{0}.csv".format(year)
+    futures_filepath = "//10.0.1.4/backup/backups/ICE_DATA/Cocoa/EOD_Futures_578_{0}.csv".format(year)
+    options_filepath = "//10.0.1.4/backup/backups/ICE_DATA/Cocoa/EOD_Options_578_{0}.csv".format(year)
     print(futures_filepath, options_filepath)
     csi.load_span_file(futures_filepath, options_filepath)
