@@ -315,12 +315,14 @@ class IceSpanImport(object):
             contract_id = futures_info.loc[fdict['MarketID']]['idcontract']
             assert contract_id is not None
 
-            info_dict = {'idcontract': int(contract_id),
-                         'settlement': settle_px,
-                         'openinterest': oi,
-                         'volume': volume,
-                         'date': dt}
-            self.mongo_queries.save_futures_settlement(info_dict)
+            if not np.isnan(contract_id):
+
+                info_dict = {'idcontract': int(contract_id),
+                             'settlement': settle_px,
+                             'openinterest': oi,
+                             'volume': volume,
+                             'date': dt}
+                self.mongo_queries.save_futures_settlement(info_dict)
 
     def save_options_quotes(self, options_df, options_info, futures_df):
         """
