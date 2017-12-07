@@ -9,6 +9,7 @@ from tqdm import tqdm, tnrange, tqdm_notebook
 #from scripts.settings import *
 
 IDINSTRUMENT = None
+IDINSTRUMENT = 36
 
 def convert_dates(values):
     k,v = values
@@ -99,6 +100,10 @@ for contracts in contracts_mongo:
     pbar.update(1)
 
 print('contracts done')
+
+
+
+
 
 
 
